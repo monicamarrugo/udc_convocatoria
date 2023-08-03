@@ -1,0 +1,16 @@
+<mat-card class="notificacion-card">
+      <mat-card-header>
+        <mat-card-title>Confirmar - {{data.titulo}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <p>{{data.mensaje}}</p>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button class="delet" (click)="no()">NO</button>
+        <button mat-raised-button class="primary" (click)="si()">SI</button>
+      </mat-card-actions>
+    </mat-card>

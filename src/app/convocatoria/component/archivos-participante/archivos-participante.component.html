@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3"> Inscripción Convocatoria</h4>
+        <form class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-5">
+                <label for="country" class="form-label"> Convocatoria Abierta</label>
+                <select class="form-select" id="country" required>
+                  <option value="">Seleccione Convocatoria...</option>
+                  <option value="1">Convocatoria 1</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please Seleccione Convocatoria.
+                </div>
+              </div>
+
+              <div class="col-sm-5">
+                <label for="codigo" class="form-label">Codigo Inscripción</label>
+                <input type="text" class="form-control" id="codigo" placeholder="" value="" required>
+                <div class="invalid-feedback">
+                    Por favor ingrese el codigo de su inscripción.
+                </div>
+              </div>
+
+          </div>  
+          <hr class="my-4">            
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Subir Documentos</button>
+        </form>
+      </div>
+</div>

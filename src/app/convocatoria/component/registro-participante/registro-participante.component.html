@@ -1,0 +1,126 @@
+<div class="container mb-4">
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3"> Inscripción Convocatoria</h4>
+        <form [formGroup] = "registroForm" (ngSubmit)="saveInscripcion()"class="needs-validation" novalidate>
+          <div class="row g-3">
+            <div class="col-md-5">
+                <label for="convocatoria" class="form-label"> Convocatoria Abierta</label>
+                <select class="form-select" id="convocatoria" formControlName="codigoConvocatoria" required #codigoConvocatoria>
+                  <option value="">Seleccione Convocatoria...</option>
+                  <option value="1">Convocatoria 1</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please Seleccione Convocatoria.
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <label for="perfil" class="form-label">Perfil Convocatoria</label>
+                <select class="form-select" id="perfil" formControlName="codigoPerfil" required #perfil>
+                  <option value="" disabled selected hidden >Seleccione perfil</option>
+                  <option *ngFor="let sede of lPerfiles" [ngValue]="sede.codigo">{{sede.codigo}}</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor Seleccione Perfil.
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <label for="tipoIdentificacion" class="form-label">Tipo Documento</label>
+                <select class="form-select" id="tipoIdentificacion" formControlName="tipoIdentificacion" required>
+                  <option disabled value="">Seleccione tipo Documento</option>
+                  <option value="CC">Cedula de Ciudadania</option>
+                </select>
+                <div class="invalid-feedback">
+                  Por favor Seleccione Tipo Documento.
+                </div>
+              </div>
+
+              <div class="col-sm-5">
+                <label for="identificacion" class="form-label">Identificacion</label>
+                <input type="text" class="form-control" id="identificacion" 
+                formControlName="identificacion" required #identificacion>
+                <div class="invalid-feedback">
+                    Por favor ingrese documento de identificación.
+                </div>
+              </div>
+              
+            <div class="col-sm-6">
+              <label for="nombres" class="form-label">Nombres</label>
+              <input type="text" class="form-control" id="nombres" formControlName="nombres" 
+              placeholder="" value="" required #nombres>
+              <div class="invalid-feedback">
+                Por favor ingrese nombres.
+              </div>
+            </div>
+
+            <div class="col-sm-6">
+              <label for="apellidos" class="form-label">Apellidos</label>
+              <input type="text" class="form-control" id="apellidos" formControlName="apellidos" 
+              placeholder="" value="" required #apellidos>
+              <div class="invalid-feedback">
+                Por favor ingrese apellidos.
+              </div>
+            </div>
+          
+            <div class="col-6">
+              <label for="email" class="form-label">Email </label>
+              <input type="email" class="form-control" id="email" formControlName="email" 
+              placeholder="you@example.com" #email>
+              <div class="invalid-feedback">
+                Por favor ingrese un correo válido.
+              </div>
+            </div>
+
+            <div class="col-6">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input type="text" class="form-control" id="telefono" formControlName="telefono" 
+              placeholder="" required #telefono>
+              <div class="invalid-feedback">
+                Por favor ingrese un número de telefono válido
+              </div>
+            </div>          
+          </div>
+
+          <hr class="my-4">
+
+          <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label" for="same-address">Acepto las politicas de privacidad publicadas en el sitio web de la Universidad</label>
+          </div>
+
+          <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label" for="save-info">Acepto los terminos y condiciones publicados en este sitio</label>
+          </div>
+
+          <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label" for="same-address">Autorizo recibir correos de este sitio web y eliminar cualquier tipo de bloqueos</label>
+          </div>
+
+          <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label" for="save-info">Declaro que la información aportada es veraz</label>
+          </div>
+
+          <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input" id="same-address">
+            <label class="form-check-label" for="same-address">Cuento con los medios técnicos, internet de alta velocidad, 
+                                                               computador, microfono, cámara y cualquier otro que sea 
+                                                               requerido durante el proceso y Acepto tener la cámara 
+                                                               y microfono activos durante la realización de la prueba 
+                                                               psicotécnica y la entrevista.</label>
+          </div>
+          <div class="form-check mb-2">
+            <input type="checkbox" class="form-check-input" id="save-info">
+            <label class="form-check-label" for="save-info">Me comprometo a Custodiar el código que será enviado al email, 
+                                                            entiendo que esté codigo no será reenviado por otro medio.</label>
+          </div>
+
+          <hr class="my-4">            
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar</button>
+        </form>
+      </div>
+</div>
