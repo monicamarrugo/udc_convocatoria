@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import {ConfirmacionComponent} from 'src/app/widgets/confirmacion/confirmacion.component';
 import {CustomModalComponent,TipoMensajeEnum} from 'src/app/widgets/custom-modal/custom-modal.component';
 import {Inscripcion} from '../../model/dtos/inscripcion';
-import { RespuestaTransaccion } from '../../model/respuesta-transaccion';
+import { RespuestaTransaccion } from '../../model/dtos/respuesta-transaccion';
 import { Router } from '@angular/router';
 
 @Component({

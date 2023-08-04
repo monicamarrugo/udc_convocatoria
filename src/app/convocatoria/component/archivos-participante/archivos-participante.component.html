@@ -1,11 +1,11 @@
 <div class="container">
     <div class="col-md-7 col-lg-8">
         <h4 class="mb-3"> Inscripción Convocatoria</h4>
-        <form class="needs-validation" novalidate>
+        <form [formGroup] = "documentoForm" (ngSubmit)="saveDocumento()"class="needs-validation" novalidate>
           <div class="row g-3">
             <div class="col-md-5">
-                <label for="country" class="form-label"> Convocatoria Abierta</label>
-                <select class="form-select" id="country" required>
+                <label for="convocatoria" class="form-label"> Convocatoria Abierta</label>
+                <select class="form-select" id="convocatoria" formControlName="convocatoria" required #convocatoria>
                   <option value="">Seleccione Convocatoria...</option>
                   <option value="1">Convocatoria 1</option>
                 </select>
@@ -15,17 +15,61 @@
               </div>
 
               <div class="col-sm-5">
-                <label for="codigo" class="form-label">Codigo Inscripción</label>
-                <input type="text" class="form-control" id="codigo" placeholder="" value="" required>
+                <label for="codigoInscripcion"  class="form-label">Código Inscripción</label>
+                <input type="text" class="form-control" (ngModelChange)="listDocumento()" id="codigoInscripcion" formControlName="codigoInscripcion" required #codigoInscripcion>
                 <div class="invalid-feedback">
                     Por favor ingrese el codigo de su inscripción.
                 </div>
               </div>
 
+              <div class="col-md-5">
+                <label for="tipoDocumento" class="form-label"> Tipo de Documento</label>
+                <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento" required #tipoDocumento>
+                  <option value="">Seleccione Tipo Documento...</option>
+                  <option value="DID">Documento de Identidad</option>
+                  <option value="EXPP">Experiencia Profesional</option>
+                  <option value="CV">Curriculo Profesional</option>
+                </select>
+                <div class="invalid-feedback">
+                  Please Seleccione tipo documento.
+                </div>
+              </div>
+              <div class="col-ms-5">
+                <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo>
+                      <div *ngIf="uploadResponse">
+                        <p>{{ uploadResponse.mensaje }}</p>
+                        <label *ngIf="uploadResponse.error == 'NO'" >Archivo subido con exito!</label>
+                      </div>
+              </div>
+
           </div>  
           <hr class="my-4">            
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Subir Documentos</button>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Subir Documento</button>
         </form>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 order-md-2">  
+            <div class="row">
+              <div class="table-responsive">
+                <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>
+                  
+                  <ng-container matColumnDef="contenido">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Documento </th>
+                    <td mat-cell *matCellDef="let element"> {{element.contenido}} </td>
+                  </ng-container>
+
+                 
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                
+
+              </div>
+            </div>
+        </div>
       </div>
 </div>

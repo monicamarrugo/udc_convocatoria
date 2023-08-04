@@ -8,6 +8,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { ConfirmacionComponent } from './widgets/confirmacion/confirmacion.component';
 import { MaterialModule } from '../app/modules/material.module';
 import { CustomModalComponent } from './widgets/custom-modal/custom-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { CustomModalComponent } from './widgets/custom-modal/custom-modal.compon
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
