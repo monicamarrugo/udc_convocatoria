@@ -22,6 +22,7 @@ export class RegistroParticipanteComponent  implements OnInit {
   public lPerfiles: Item[] = [];
   public lPaises: Item[] = [];
   descripcionPerfil : string | undefined = '';
+  selectedPerfil:any = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -136,12 +137,19 @@ public saveInscripcion():void {
   }
 
   public onChangePerfil(event: any) {
-    console.log(event.target.value); 
-    const selectedCodigoPerfil = event.target.value;
+    console.log(event.target); 
+    const selectedCodigoPerfil: string = event.target.value;
     let periles = this.lPerfiles.slice();
+    console.log(periles);
+    console.log("this.selectedPerfil");
+    console.log(this.selectedPerfil);
     //let perfil :string |undefined = "";
-    let perfil = periles.find( p => p.codigo = selectedCodigoPerfil);
-    this.registroForm.controls["descripcion"].setValue(perfil?.descripcion);
+    //let perfil: Item|undefined = undefined;
+    let perfil = periles.find( p => p?.codigo.toLowerCase() === this.selectedPerfil);
+    console.log("perfil"); 
+    console.log(perfil); 
+    this.descripcionPerfil = "";
+    this.descripcionPerfil = perfil?.descripcion;
   }
 
  
