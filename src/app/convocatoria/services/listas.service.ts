@@ -33,6 +33,11 @@ import { Item } from 'src/app/convocatoria/model/item'
   getPerfilesMock(): Observable<Item[]> {
     return this.http.get<Item[]>('assets/datos/perfiles.json');
   }
+
+  getPerfiles(): Observable<Item[]> {
+    const url = `/api/ListasTiposBasicos/GetListaPerfiles`;
+    return this.getRequest(url);
+  }
   getPaisesMock(): Observable<Item[]> {
     return this.http.get<Item[]>('assets/datos/paises.json');
   }

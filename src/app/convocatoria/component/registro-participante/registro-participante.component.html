@@ -16,13 +16,19 @@
 
               <div class="col-md-5">
                 <label for="perfil" class="form-label">Perfil Convocatoria</label>
-                <select class="form-select" id="perfil" formControlName="codigoPerfil" required #perfil>
+                <select class="form-select" id="perfil" formControlName="codigoPerfil" (change)="onChangePerfil($event)" required #perfil>
                   <option value="" disabled selected hidden >Seleccione perfil</option>
-                  <option *ngFor="let sede of lPerfiles" [ngValue]="sede.codigo">{{sede.codigo}}</option>
+                  <option *ngFor="let sede of lPerfiles" [ngValue]="sede.codigo">{{sede.nombre}}</option>
                 </select>
                 <div class="invalid-feedback">
                   Por favor Seleccione Perfil.
                 </div>
+              </div>
+              <div class="col-md-10">
+                <textarea class="col-md-12" rows="5" disable matInput placeholder="Descripción perfil escogido" formControlName="descripcion">
+
+                </textarea>
+          
               </div>
 
               <div class="col-md-5">

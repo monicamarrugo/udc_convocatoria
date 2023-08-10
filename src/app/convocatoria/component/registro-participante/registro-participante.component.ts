@@ -21,6 +21,7 @@ export class RegistroParticipanteComponent  implements OnInit {
   public nonSelectedOptionValue: string = '';
   public lPerfiles: Item[] = [];
   public lPaises: Item[] = [];
+  descripcionPerfil : string | undefined = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,7 +38,8 @@ export class RegistroParticipanteComponent  implements OnInit {
       nombres:['', Validators.required],
       apellidos:['', Validators.required],
       email:['', Validators.required],
-      telefono:['', Validators.required]
+      telefono:['', Validators.required],
+      descripcion:['']
      });
   }
 
@@ -46,7 +48,6 @@ export class RegistroParticipanteComponent  implements OnInit {
   }
 
 public saveInscripcion():void {
-  console.log("entró");
     if(this.registroForm.valid){
       console.log("valid");
       const dialogRef = this._dialog.open(ConfirmacionComponent, {
@@ -63,8 +64,17 @@ public saveInscripcion():void {
 
             
           if (response && response == true) {
-                  let dto: Inscripcion = new Inscripcion(this.registroForm.getRawValue());
-  
+                  let dto: Inscripcion = new Inscripcion({
+                  codigoConvocatoria : this.registroForm.controls["codigoConvocatoria"].value,
+                  codigoPerfil : this.registroForm.controls["codigoPerfil"].value,
+                  tipoIdentificacion : this.registroForm.controls["tipoIdentificacion"].value,
+                  identificacion : this.registroForm.controls["identificacion"].value,
+                  nombres : this.registroForm.controls["nombres"].value,
+                  apellidos : this.registroForm.controls["apellidos"].value,
+                  email : this.registroForm.controls["email"].value,
+                  telefono : this.registroForm.controls["telefono"].value
+                });
+
                   this.convocatoriaService
                   .saveInscripcion(dto)
                   .subscribe((result:RespuestaTransaccion)=>{
@@ -115,7 +125,7 @@ public saveInscripcion():void {
         );
     
         this.listaService
-          .getPerfilesMock()
+          .getPerfiles()
           .subscribe({
                   next: (data) => { 
                     this.lPerfiles = data;
@@ -123,6 +133,15 @@ public saveInscripcion():void {
                   error: (error) => {
                   },
                     });
+  }
+
+  public onChangePerfil(event: any) {
+    console.log(event.target.value); 
+    const selectedCodigoPerfil = event.target.value;
+    let periles = this.lPerfiles.slice();
+    //let perfil :string |undefined = "";
+    let perfil = periles.find( p => p.codigo = selectedCodigoPerfil);
+    this.registroForm.controls["descripcion"].setValue(perfil?.descripcion);
   }
 
  
