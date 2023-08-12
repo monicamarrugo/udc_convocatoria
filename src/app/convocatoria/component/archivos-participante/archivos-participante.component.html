@@ -1,14 +1,7 @@
 <div class="container">
     <div class="col-md-7 col-lg-8">
         <h4 class="mb-3"> Inscripción Convocatoria</h4>
-        <div class="row">
-          <div class="col-md-5">
-            <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Descargar Resolución</button>
-          </div>
-          <div class="col-md-5">
-            <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('FormatoHV.pdf')" type="button">Descargar Formato Hoja de vida</button>
-          </div>
-        </div><br>
+       
         <form [formGroup] = "documentoForm" (ngSubmit)="saveDocumento()"class="needs-validation" novalidate>
 
           <div class="row g-3">

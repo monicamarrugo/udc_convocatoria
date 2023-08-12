@@ -44,19 +44,8 @@ export class ArchivosParticipanteComponent  implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("Hola");
   }
-  downloadDocumento(fileName:string){
-    this.documentoService.downloadFile(fileName).subscribe(response => {
-      const blob = new Blob([response], { type: 'application/pdf' }); // Cambia el tipo MIME según tu archivo
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = fileName;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    });
-  }
+ 
 
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
