@@ -9,14 +9,10 @@
           <button type="button" [routerLink]="'/convocatoria/participante'" class="btn btn-primary btn-lg px-4 gap-3">Registro Perfil</button>
           <button type="button" [routerLink]="'/convocatoria/documentos'" class="btn btn-outline-secondary btn-lg px-4">Subir Documentos</button>
         </div>
-      </div>
-      <div class="col-lg-6 mx-auto">
-        <div class="col-md-5">
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
           <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Descargar Resolución</button>
-        </div>
-        <div class="col-md-5">
           <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('FormatoHV.pdf')" type="button">Descargar Formato Hoja de vida</button>
         </div>
-      </div><br>
+      </div>
     </div>
 </main>
