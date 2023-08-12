@@ -42,6 +42,20 @@ export class DocumentosService extends AppRequest {
     return this.http.get<ResponseDocumento[]>(url);
   }
 
+  downloadFile(fileName:string) {
+
+   
+    const apiUrl = `https://localhost:7045/api/Documento/descargar?fileName=${fileName}`; // Cambia la URL según tu configuración
+
+    const requestData = { fileName: fileName };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'responseType': 'blob'
+    });
+
+    return this.http.post<any>(apiUrl, requestData, { headers: headers, responseType: 'blob' as 'json' });
+  }
 
 
 

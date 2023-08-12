@@ -23,9 +23,11 @@ export class ArchivosParticipanteComponent  implements OnInit {
   public dataSource: MatTableDataSource<ResponseDocumento>;
   public codigoConvocatoria:string='';
   public displayedColumns: string[] = [
-    'contenido'
+    'contenido',
+    'descTipodocumento'
    ];
-
+   groupColumns = ['tipoDocumento'];
+   dataColumns = ['contenido', 'descTipodocumento'];
   constructor(
     private documentoService: DocumentosService,
     private formBuilder: FormBuilder,
@@ -43,6 +45,17 @@ export class ArchivosParticipanteComponent  implements OnInit {
 
   ngOnInit(): void {
     console.log("Hola");
+  }
+  downloadDocumento(fileName:string){
+    this.documentoService.downloadFile(fileName).subscribe(response => {
+      const blob = new Blob([response], { type: 'application/pdf' }); // Cambia el tipo MIME según tu archivo
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 
   onFileSelected(event: any) {

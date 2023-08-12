@@ -117,9 +117,7 @@ public saveInscripcion():void {
       this.registroForm.controls[controlName].disable();
     });
   }
-
-
-
+  
   private getPerfiles() {
        this.registroForm.controls['codigoPerfil'].setValue(
           this.nonSelectedOptionValue
@@ -137,21 +135,9 @@ public saveInscripcion():void {
   }
 
   public onChangePerfil(event: any) {
-    console.log(event.target); 
-    const selectedCodigoPerfil: string = event.target.value;
-    let periles = this.lPerfiles.slice();
-    console.log(periles);
-    console.log("this.selectedPerfil");
-    console.log(this.selectedPerfil);
-    //let perfil :string |undefined = "";
-    //let perfil: Item|undefined = undefined;
-    let perfil = periles.find( p => p?.codigo.toLowerCase() === this.selectedPerfil);
-    console.log("perfil"); 
-    console.log(perfil); 
+    let perfiles = this.lPerfiles.slice();
+    let perfil = perfiles.find( p => p?.codigo === this.selectedPerfil);
     this.descripcionPerfil = "";
     this.descripcionPerfil = perfil?.descripcion;
   }
-
- 
-
 }
