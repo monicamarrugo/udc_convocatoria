@@ -1,18 +1,42 @@
 <main>
 
-    <div class="px-4 py-5 my-5 text-center">
+    <div class="px-4  text-center">
       <!--<img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
       <h1 class="display-5 fw-bold text-body-emphasis">Convocatoria Docente</h1>
       <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4">Descripcion del portal</p>
+        
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
           <button type="button" [routerLink]="'/convocatoria/participante'" class="btn btn-primary btn-lg px-4 gap-3">Registro Perfil</button>
           <button type="button" [routerLink]="'/convocatoria/documentos'" class="btn btn-outline-secondary btn-lg px-4">Subir Documentos</button>
         </div>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+          <h2 class="mb-3"> ¡Lo que necesitas conocer!</h2>
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
+         
           <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Descargar Resolución</button>
           <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('FormatoHV.pdf')" type="button">Descargar Formato Hoja de vida</button>
+          <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('AcuerdoConcurso.pdf')" type="button">Acuerdo Concurso</button>
         </div>
+        
+      </div>
+      
+    </div>
+    <div class="px-4 ">
+      <div class="col-lg-6 mx-auto">
+        <p class="text-justify">La Universidad de Cartagena invita a concursar para la provisión de cargos 
+          docentes con dedicación de tiempo completo y medio tiempo teniendo en cuenta la reglamentación y 
+          el cronograma establecidos.</p>
+        <p class="text-center">
+          En concordancia con el Plan de  Desarrollo Estratégico Institucional 2022-2026 
+          “Hacia una Universidad transformadora y humanista”, la Universidad de Cartagena 
+          promueve que todo aspirante que desee vincularse a la institución, como complemento de sus 
+          competencias disciplinares e investigativas, deberá asumir su ejercicio pedagógico desde 
+          un enfoque integral, en el que predomine la responsabilidad social, la sensibilidad humana, 
+          el compromiso con el entorno institucional, ambiental, cultural y en donde predomine 
+          una visión en la que la convivencia la paz y la armonía sean principios inspiradores del quehacer 
+          formativo.
+        </p>
       </div>
     </div>
 </main>

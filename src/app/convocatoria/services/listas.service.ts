@@ -42,6 +42,11 @@ import { Item } from 'src/app/convocatoria/model/item'
     return this.http.get<Item[]>('assets/datos/paises.json');
   }
 
+  getTiposDocumento(): Observable<Item[]> {
+    const url = `/api/ListasTiposBasicos/GetListaTiposDocumentos`;
+    return this.getRequest(url);
+  }
+
   
 
 }

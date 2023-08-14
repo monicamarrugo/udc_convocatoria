@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="col-md-7 col-lg-8">
+  <div class="row">
+    <div class="col-md-8">
         <h4 class="mb-3"> Inscripción Convocatoria</h4>
-       
         <form [formGroup] = "documentoForm" (ngSubmit)="saveDocumento()"class="needs-validation" novalidate>
 
           <div class="row g-3">
@@ -27,14 +27,8 @@
               <div class="col-md-5">
                 <label for="tipoDocumento" class="form-label"> Tipo de Documento</label>
                 <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento" required #tipoDocumento>
-                  <option value="">Seleccione Tipo Documento...</option>
-                  <option value="CV">Formato único de hoja de vida</option>
-                  <option value="DID">Documento de Identidad</option>
-                  <option value="FA">Formación académica</option>
-                  <option value="PA">Producción académica</option>
-                  <option value="EXPP">Certificado de experiencia profesional calificada en el ejercicio de su profesión</option>
-                  <option value="EDES">Certificados de experiencia docente en educación superior</option>
-                  <option value="CCLI">Certificado de competencia lengua inglesa</option>
+                  <option value="" disabled selected hidden >Seleccione tipo documento</option>
+                  <option *ngFor="let tipo of lTiposDocumento" [ngValue]="tipo.codigo">{{tipo.descripcion}}</option>
                 </select>
                 <div class="invalid-feedback">
                   Please Seleccione tipo documento.
@@ -54,11 +48,27 @@
 
           <button class="w-100 btn btn-primary btn-lg" type="submit">Subir Documento</button>
         </form>
+    </div>
+    <div class="col-md-4">
+      <h2 class="mb-3"> ¡Estado de documentos!</h2>
+      <div *ngFor="let ds of lDocumentosSubidos" class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div *ngIf="ds.subido" class="input-group-text btn btn-success" id="btnGroupAddon2">
+            <i class="bi bi-check-circle-fill"></i></div>
+            <div *ngIf="!ds.subido" class="input-group-text btn btn-danger" id="btnGroupAddon2">
+              <i class="bi bi-check-circle-fill"></i></div>
+        </div>
+        <input type="text" disabled="true" [(ngModel)]="ds.descripcion" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
       </div>
+     
+      
+    </div>
+  </div>
 
       <div class="row">
         <div class="col-md-12 order-md-2">  
             <div class="row">
+              <h2 class="mb-3"> Lista de documentos</h2>
               <div class="table-responsive">
                 <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>
                   

@@ -8,6 +8,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import {ConfirmacionComponent} from 'src/app/widgets/confirmacion/confirmacion.component';
 import {CustomModalComponent,TipoMensajeEnum} from 'src/app/widgets/custom-modal/custom-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { Item } from 'src/app/convocatoria/model/item'
+import { ListasService} from '../../services/listas.service'
 
 @Component({
   selector: 'app-archivos-participante',
@@ -22,6 +24,8 @@ export class ArchivosParticipanteComponent  implements OnInit {
   public nonSelectedOptionValue: string = '';
   public dataSource: MatTableDataSource<ResponseDocumento>;
   public codigoConvocatoria:string='';
+  public lTiposDocumento: Item[] = [];
+  public lDocumentosSubidos: Item[] = [];
   public displayedColumns: string[] = [
     'contenido',
     'descTipodocumento'
@@ -31,6 +35,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
   constructor(
     private documentoService: DocumentosService,
     private formBuilder: FormBuilder,
+    private listaService: ListasService,
     public _dialog: MatDialog){
     
       this.dataSource = new MatTableDataSource<ResponseDocumento>([]);
@@ -44,6 +49,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTiposDocumento();
   }
  
 
@@ -57,6 +63,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
       next: (documentos: ResponseDocumento[]) => {     
         if (documentos.length > 0) {
           this.dataSource.data = documentos;
+          this.verificarSubidos(documentos.slice());
         } else {
           this.dataSource.data = [];
           
@@ -65,6 +72,35 @@ export class ArchivosParticipanteComponent  implements OnInit {
 
     });
   }
+  verificarSubidos(documentosSubidos:ResponseDocumento[]){
+      
+      this.lDocumentosSubidos = this.lTiposDocumento.slice();
+      this.lDocumentosSubidos.find( d => {
+        if(documentosSubidos.some(s => s.tipoDocumento === d.codigo)){
+          d.subido=true;
+        }
+        else{
+          d.subido=false;
+        }
+      });
+      console.log(" this.lDocumentosSubidos");
+      console.log(this.lDocumentosSubidos);
+  }
+  private getTiposDocumento() {
+    this.documentoForm.controls['tipoDocumento'].setValue(
+       this.nonSelectedOptionValue
+     );
+ 
+     this.listaService
+       .getTiposDocumento()
+       .subscribe({
+               next: (data) => { 
+                 this.lTiposDocumento = data;
+                   },
+               error: (error) => {
+               },
+                 });
+}
 
   saveDocumento() {
     if (!this.selectedFile) return;
