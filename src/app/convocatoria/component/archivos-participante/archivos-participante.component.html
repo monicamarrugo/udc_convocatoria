@@ -28,9 +28,13 @@
                 <label for="tipoDocumento" class="form-label"> Tipo de Documento</label>
                 <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento" required #tipoDocumento>
                   <option value="">Seleccione Tipo Documento...</option>
+                  <option value="CV">Formato único de hoja de vida</option>
                   <option value="DID">Documento de Identidad</option>
-                  <option value="EXPP">Experiencia Profesional</option>
-                  <option value="CV">Curriculo Profesional</option>
+                  <option value="FA">Formación académica</option>
+                  <option value="PA">Producción académica</option>
+                  <option value="EXPP">Certificado de experiencia profesional calificada en el ejercicio de su profesión</option>
+                  <option value="EDES">Certificados de experiencia docente en educación superior</option>
+                  <option value="CCLI">Certificado de competencia lengua inglesa</option>
                 </select>
                 <div class="invalid-feedback">
                   Please Seleccione tipo documento.
