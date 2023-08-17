@@ -3,3 +3,18 @@
 @import '~bootstrap-icons/font/bootstrap-icons.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.bg-dark-udc{
+  background-color: #a63c24;
+}
+.full-width{
+  width: 100%;
+}
+.btn-primary-udc{
+  background-color: #e79d19;
+  color: #fff;
+}
+.btn-primary-udc2{
+  background-color: #ff6100;
+  color: #fff;
+}

@@ -1,0 +1,18 @@
+.btn-primary-udc{
+    background-color: #e79d19;
+    color: #fff;
+  }
+  .btn-primary-udc2{
+    background-color: #ff6100;
+    color: #fff;
+  }
+
+  .badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.badge-danger {
+  color: #fff;
+  background-color: #dc3545;
+}

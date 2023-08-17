@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppRequest } from 'src/app/core/base/request/app-request';
 import { environment } from 'src/environments/environment';
 import { Observable } from "rxjs";
+import { Convocatoria } from '../model/dtos/convocatoria';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,11 @@ export class ConvocatoriaService extends AppRequest {
       const url =  `/api/Inscripcion/inscribir`;
       return this.postRequest(url, datosInscripcion);
     }
+
+  getConvocatoria(codigoConvocatoria:string): Observable<Convocatoria> {
+    const url =  `/api/Convocatoria/obtenerConvocatoria?idConvocatoria=${codigoConvocatoria}`;
+    return this.getRequest(url);
+  }
 
 
 

@@ -1,0 +1,22 @@
+.bg-gray {
+    background-color: white!important;
+    color: #343a40 !important;
+}
+.text-justify{
+    text-align: justify;
+}
+.text-primary-udc{
+    color: #ff5d02;
+}
+
+.text-udc{
+    color: #777777;
+}
+.btn-primary-udc{
+    background-color: #e79d19;
+    color: #fff;
+  }
+  .btn-primary-udc2{
+    background-color: #ff6100;
+    color: #fff;
+  }

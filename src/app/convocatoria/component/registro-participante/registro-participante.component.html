@@ -1,126 +1,160 @@
-<div class="container mb-4">
-    <div class="col-md-7 col-lg-8">
+<div class="container mt-4 mb-4">
+    <div class="col-md-7 col-lg-10">
         <h4 class="mb-3"> Inscripción Convocatoria</h4>
         <form [formGroup] = "registroForm" (ngSubmit)="saveInscripcion()"class="needs-validation" novalidate>
           <div class="row g-3">
-            <div class="col-md-5">
-                <label for="convocatoria" class="form-label"> Convocatoria Abierta</label>
-                <select class="form-select" id="convocatoria" formControlName="codigoConvocatoria" required #codigoConvocatoria>
-                  <option value="">Seleccione Convocatoria...</option>
-                  <option value="1">Convocatoria 01999</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please Seleccione Convocatoria.
-                </div>
+            <div class="col-md-6">
+              <mat-form-field class="full-width">
+              <mat-label> Convocatoria Abierta</mat-label>
+                <mat-select id="convocatoria" [(value)]="selectedConvocatoria" formControlName="codigoConvocatoria" required #codigoConvocatoria>
+                    <mat-option *ngFor="let convocatoria of conovocatorias" [value]="convocatoria.codigo">{{convocatoria.nombre}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="registroForm.controls['codigoConvocatoria'].hasError('required')">
+                  Por favor Seleccione Convocatoria.
+              </mat-error>
+              </mat-form-field>
               </div>
 
-              <div class="col-md-5">
-                <label for="perfil" class="form-label">Perfil Convocatoria</label>
-                <select class="form-select" [(ngModel)]="selectedPerfil" id="perfil" formControlName="codigoPerfil" 
-                (change)="onChangePerfil($event)" required #perfil>
-                  <option value="" disabled selected hidden >Seleccione perfil</option>
-                  <option *ngFor="let sede of lPerfiles" [ngValue]="sede.codigo">{{sede.codigo}}</option>
-                </select>
-                <div class="invalid-feedback">
-                  Por favor Seleccione Perfil.
-                </div>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Perfil</mat-label>
+                  <mat-select matInput [(value)]="selectedPerfil" id="perfil" formControlName="codigoPerfil" 
+                  (selectionChange)="onChangePerfil($event)" required #perfil>
+                    <mat-option value="" disabled selected >Seleccione perfil</mat-option>
+                    <mat-option *ngFor="let sede of lPerfiles" [value]="sede.codigo">{{sede.codigo}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="registroForm.controls['codigoPerfil'].hasError('required')">
+                      Por favor Seleccione Perfil.
+                  </mat-error>
+              </mat-form-field>
               </div>
-              <div class="col-md-10">
-                <textarea class="col-md-12" rows="5" [(ngModel)]="descripcionPerfil" disable matInput 
+              <div class="col-md-12">
+                <textarea class="col-md-12" rows="5" [(ngModel)]="descripcionPerfil" matInput 
                 placeholder="Descripción perfil escogido" formControlName="descripcion">
                 </textarea>
               </div>
 
-              <div class="col-md-5">
-                <label for="tipoIdentificacion" class="form-label">Tipo Documento</label>
-                <select class="form-select" id="tipoIdentificacion" formControlName="tipoIdentificacion" required>
-                  <option disabled value="">Seleccione tipo Documento</option>
-                  <option value="CC">Cedula de Ciudadanía</option>
-                  <option value="CE">Cedula de Extranjería</option>
-                  <option value="PS">Pasaporte</option>
-                  <option value="OT">Otro</option>
-                </select>
-                <div class="invalid-feedback">
-                  Por favor Seleccione Tipo Documento.
-                </div>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Tipo Identificación</mat-label>
+                <mat-select id="tipoIdentificacion" formControlName="tipoIdentificacion" required>
+                  <mat-option disabled value="">Seleccione tipo Identificación</mat-option>
+                  <mat-option value="CC">Cedula de Ciudadanía</mat-option>
+                  <mat-option value="CE">Cedula de Extranjería</mat-option>
+                  <mat-option value="PS">Pasaporte</mat-option>
+                  <mat-option value="OT">Otro</mat-option>
+                </mat-select>
+                <mat-error *ngIf="registroForm.controls['tipoIdentificacion'].hasError('required')">
+                  Por favor Seleccione Tipo Identificación
+                </mat-error>
+              </mat-form-field>
               </div>
 
-              <div class="col-sm-5">
-                <label for="identificacion" class="form-label">Identificacion</label>
-                <input type="text" class="form-control" id="identificacion" 
-                formControlName="identificacion" required #identificacion>
-                <div class="invalid-feedback">
-                    Por favor ingrese documento de identificación.
-                </div>
+              <div class="col-md-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Número de Identificación</mat-label>
+                  <input matInput id="identificacion" 
+                  formControlName="identificacion" required #identificacion>
+                  <mat-error *ngIf="registroForm.controls['identificacion'].hasError('required')">
+                      Por favor ingrese documento de identificación.
+                  </mat-error>
+              </mat-form-field>
               </div>
               
             <div class="col-sm-6">
-              <label for="nombres" class="form-label">Nombres</label>
-              <input type="text" class="form-control" id="nombres" formControlName="nombres" 
-              placeholder="" value="" required #nombres>
-              <div class="invalid-feedback">
-                Por favor ingrese nombres.
-              </div>
+              <mat-form-field class="full-width">
+                <mat-label>Nombres</mat-label>
+                <input matInput id="nombres" formControlName="nombres" value="" required #nombres>
+                <mat-error *ngIf="registroForm.controls['nombres'].hasError('required')">
+                  Por favor ingrese Nombres.
+                </mat-error>
+              </mat-form-field>
             </div>
-
             <div class="col-sm-6">
-              <label for="apellidos" class="form-label">Apellidos</label>
-              <input type="text" class="form-control" id="apellidos" formControlName="apellidos" 
-              placeholder="" value="" required #apellidos>
-              <div class="invalid-feedback">
-                Por favor ingrese apellidos.
-              </div>
+              <mat-form-field class="full-width">
+                <mat-label>Apellidos</mat-label>
+                <input matInput id="apellidos" formControlName="apellidos" value="" required #apellidos>
+                <mat-error *ngIf="registroForm.controls['apellidos'].hasError('required')">
+                  Por favor ingrese Apellidos.
+                </mat-error>
+              </mat-form-field>
             </div>
           
             <div class="col-6">
-              <label for="email" class="form-label">Email </label>
-              <input type="email" class="form-control" id="email" formControlName="email" 
-              placeholder="you@example.com" #email>
-              <div class="invalid-feedback">
-                Por favor ingrese un correo válido.
-              </div>
+              <mat-form-field class="full-width">
+                <mat-label>Correo Electrónico</mat-label>
+                <input matInput id="email" formControlName="email" required #email>
+                <mat-error *ngIf="registroForm.controls['email'].hasError('required')">
+                  Por favor ingrese Correo Electrónico.
+                </mat-error>
+                <mat-error *ngIf="registroForm.controls['email'].hasError('pattern')">
+                  Formato de email incorrecto
+                </mat-error>
+              </mat-form-field>
             </div>
 
             <div class="col-6">
-              <label for="telefono" class="form-label">Teléfono</label>
-              <input type="text" class="form-control" id="telefono" formControlName="telefono" 
-              placeholder="" required #telefono>
-              <div class="invalid-feedback">
-                Por favor ingrese un número de telefono válido
-              </div>
+              <mat-form-field class="full-width">
+                <mat-label>Número Teléfono</mat-label>
+                <input matInput id="telefono" formControlName="telefono" value="" required #telefono>
+                <mat-error *ngIf="registroForm.controls['telefono'].hasError('required')">
+                  Por favor ingrese Número Teléfono.
+                </mat-error>
+                <mat-error *ngIf="registroForm.controls['telefono'].hasError('pattern')">
+                  Por favor ingrese sólo números.
+                </mat-error>
+                <mat-error *ngIf="registroForm.controls['telefono'].hasError('maxLength')">
+                  La longitud máxima es 10 caracteres
+                </mat-error>
+              </mat-form-field>
             </div>          
           </div>
 
           <hr class="my-4">
 
           <div class="form-check mb-2">
-            <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">Acepto las politicas de privacidad publicadas en el sitio web de la Universidad</label>
-          </div>
-
-          <div class="form-check mb-2">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Acepto los terminos y condiciones publicados en este sitio</label>
-          </div>
-
-          <div class="form-check mb-2">
-            <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">Autorizo recibir correos de este sitio web y eliminar cualquier tipo de bloqueos</label>
-          </div>
-
-          <div class="form-check mb-2">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Declaro que la información aportada es veraz</label>
+           
+            <mat-checkbox [required]="true" [(ngModel)]="isCheckedPoliticas" matInput formControlName="aceptoPoliticas">
+              Acepto las politicas de privacidad publicadas en el sitio web de la Universidad
+            </mat-checkbox>
+            <mat-error *ngIf="registroForm.controls['aceptoPoliticas'].hasError('required')">
+              Es requerido que acepte.
+            </mat-error>
           </div>
           <div class="form-check mb-2">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Me comprometo a Custodiar el código que será generado en la plataforma, 
-                                                            entiendo que esté codigo no será reenviado por otro medio.</label>
+            <mat-checkbox [required]="true" [(ngModel)]="isCheckedTerminos" matInput formControlName="aceptoTerminos">
+              Acepto los terminos y condiciones publicados en este sitio
+            </mat-checkbox>
+            <mat-error *ngIf="registroForm.controls['aceptoTerminos'].hasError('required')">
+              Es requerido que acepte.
+            </mat-error>
           </div>
-
-          <hr class="my-4">            
-
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Guardar</button>
+          <div class="form-check mb-2">
+            <mat-checkbox [required]="true" [(ngModel)]="isCheckedCorreos" matInput formControlName="aceptoCorreos">
+              Autorizo recibir correos de este sitio web y eliminar cualquier tipo de bloqueos
+            </mat-checkbox>
+            <mat-error *ngIf="registroForm.controls['aceptoCorreos'].hasError('required')">
+              Es requerido que autorice.
+            </mat-error>
+          </div>
+          <div class="form-check mb-2">
+            <mat-checkbox [required]="true" [(ngModel)]="isCheckedVeraz" matInput formControlName="aceptoVeraz">
+              Declaro que la información aportada es veraz
+            </mat-checkbox>
+            <mat-error *ngIf="registroForm.controls['aceptoVeraz'].hasError('required')">
+              Es requerido que acepte.
+            </mat-error>
+          </div>
+          <div class="form-check mb-2">
+            <mat-checkbox [required]="true" [(ngModel)]="isCheckedCustodiar" matInput formControlName="aceptoCustodiar">
+              Me comprometo a Custodiar el código que será generado en la plataforma, entiendo que esté codigo no será reenviado por otro medio.
+            </mat-checkbox>
+            <mat-error *ngIf="registroForm.controls['aceptoCustodiar'].hasError('required')">
+              Es requerido que acepte.
+            </mat-error>
+          </div>
+          <hr class="my-4">       
+          <button class="w-100 btn btn-primary-udc2 btn-lg mb-4" [disabled]="disableSave" type="submit">Guardar</button>
         </form>
       </div>
 </div>

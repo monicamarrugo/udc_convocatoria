@@ -9,6 +9,7 @@ import {CustomModalComponent,TipoMensajeEnum} from 'src/app/widgets/custom-modal
 import {Inscripcion} from '../../model/dtos/inscripcion';
 import { RespuestaTransaccion } from '../../model/dtos/respuesta-transaccion';
 import { Router } from '@angular/router';
+import { Convocatoria } from '../../model/dtos/convocatoria';
 
 @Component({
   selector: 'app-registro-participante',
@@ -23,7 +24,16 @@ export class RegistroParticipanteComponent  implements OnInit {
   public lPaises: Item[] = [];
   descripcionPerfil : string | undefined = '';
   selectedPerfil:any = null;
-
+  isCheckedPoliticas:boolean=false;
+  isCheckedTerminos:boolean=false;
+  isCheckedCorreos:boolean=false;
+  isCheckedCustodiar:boolean=false;
+  isCheckedVeraz:boolean=false;
+  disableSave:boolean=false;
+  public selectedConvocatoria:string='1';
+  patronEmail = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
+  conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 01999', fechaInicio:'', fechaFin:'', activo: true}];
+  selectedOption: string = 'Opción 2'; // Valor por defecto
   constructor(
     private formBuilder: FormBuilder,
     private listaService: ListasService,
@@ -31,26 +41,46 @@ export class RegistroParticipanteComponent  implements OnInit {
     public _dialog: MatDialog,
     private router: Router
     ){
+      
+      this.disableSave = false;
     this.registroForm = this.formBuilder.group({
-      codigoConvocatoria: ['', Validators.required],
+      codigoConvocatoria: ['1', Validators.required],
       codigoPerfil:['', Validators.required],
       tipoIdentificacion:['', Validators.required],
       identificacion:['', Validators.required],
       nombres:['', Validators.required],
       apellidos:['', Validators.required],
-      email:['', Validators.required],
-      telefono:['', Validators.required],
-      descripcion:['']
+      email:['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.patronEmail)],],
+      telefono:['', [Validators.required, Validators.maxLength(10), Validators.pattern('^[0-9_ ]*$')],],
+      descripcion:[{value: '', disabled: true}],
+      aceptoPoliticas:['', Validators.required],
+      aceptoTerminos:['', Validators.required],
+      aceptoCorreos:['', Validators.required],
+      aceptoVeraz:['', Validators.required],
+      aceptoCustodiar:['', Validators.required]
      });
+     this.selectedConvocatoria = '1';
   }
 
   ngOnInit(): void {
-    this.getPerfiles();
+    this.validarConvocatoria("1");
+  }
+  validarConvocatoria(codigoConvocatoria:string){
+    this.convocatoriaService
+                  .getConvocatoria(codigoConvocatoria)
+                  .subscribe((convocatoria:Convocatoria)=>{
+                      if(!convocatoria.activo){
+                        this.deshabilitarFormulario();
+                      }
+                      else{
+                        this.getPerfiles();
+                      }
+                  });
   }
 
 public saveInscripcion():void {
     if(this.registroForm.valid){
-      console.log("valid");
+      this.disableSave = true;
       const dialogRef = this._dialog.open(ConfirmacionComponent, {
                 width: '95%',
                 maxHeight: '95vh',
@@ -62,8 +92,6 @@ public saveInscripcion():void {
               });
 
         dialogRef.afterClosed().subscribe((response: boolean) => {
-
-            
           if (response && response == true) {
                   let dto: Inscripcion = new Inscripcion({
                   codigoConvocatoria : this.registroForm.controls["codigoConvocatoria"].value,
@@ -98,16 +126,16 @@ public saveInscripcion():void {
                           this._dialog.open(CustomModalComponent,
                                 { width: '450px',
                                   data: {
-                                    mensaje: "Se ha generado el siguiente error: \n "+ result.errorDetail,
+                                    mensaje: "¡Atención!: \n "+ result.errorDetail,
                                   tipoMensaje: TipoMensajeEnum.success
                                 }
                               });  
                         }
-  
-                        
-                    
                   });
-                  }
+            }
+            else{
+              this.disableSave = false;
+            }
         });
   }
 }
@@ -116,6 +144,7 @@ public saveInscripcion():void {
     Object.keys(this.registroForm.controls).forEach(controlName => {
       this.registroForm.controls[controlName].disable();
     });
+    this.disableSave=true;
   }
   
   private getPerfiles() {

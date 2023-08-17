@@ -1,38 +1,12 @@
 <main>
-
-    <div class="px-4  text-center">
-      <!--<img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">-->
-      <h1 class="display-5 fw-bold text-body-emphasis">Universidad de Cartagena </h1>
-      <h2 class="display-5 fw-bold text-body-emphasis">Vicerrectoría de Docencia</h2>
-      <h2 class="display-5 fw-bold text-body-emphasis">Concurso público de meritos para docentes de plata de tiempo completo y medio tiempo 2023</h2>
-      <div class="col-lg-6 mx-auto">
-        
-      
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-          <h2 class="mb-3"> ¡Lo que necesitas conocer!</h2>
-        </div>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
-         
-          <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Resolución de Convocatoria</button>
-          <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('AcuerdoConcurso.pdf')" type="button">Reglamento del Concurso</button>
-          <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('AcuerdoConcurso.pdf')" type="button">Cronograma del Concurso</button>
-          
-        </div>
-        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-4">
-          <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('FormatoHV.pdf')" type="button">Formato Hoja de Vida</button>
-          <button class="w-100 btn btn-primary btn-sm" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Instructivo del Aplicativo</button>
-           
-        </div>
-        
-      </div>
-      
-    </div>
-    <div class="px-4 ">
-      <div class="col-lg-6 mx-auto">
+  <div class="jumbotron p-3 p-md-5 text-white rounded bg-gray">
+    <div class="row mb-2 px-0">
+      <div class="col-md-6">
+      <h3 class="display-7 font-italic fw-bold">Universidad de Cartagena </h3>
+      <h5 class="display-12 fw-bold">Vicerrectoría de Docencia</h5>
         <p class="text-justify">La Universidad de Cartagena invita a concursar para la provisión de cargos 
           docentes con dedicación de tiempo completo y medio tiempo teniendo en cuenta la reglamentación y 
-          el cronograma establecido.</p>
-        <p class="text-justify">
+          el cronograma establecido.
           En concordancia con el Plan de  Desarrollo Estratégico Institucional 2022-2026 
           “Hacia una Universidad transformadora y humanista”, la Universidad de Cartagena 
           promueve que todo aspirante que desee vincularse a la institución, como complemento de sus 
@@ -43,9 +17,40 @@
           formativo.
         </p>
       </div>
+        <div class="col-md-5">
+          <h3 class="display-7 font-italic fw-bold">¡Lo que necesitas conocer!</h3>
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              
+                <div class="card-body mb-auto">
+                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Resolución de Convocatoria</button>
+                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('AcuerdoConcurso.pdf')" type="button">Reglamento del Concurso</button>
+                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('AcuerdoConcurso.pdf')" type="button">Cronograma del Concurso</button>
+                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('FormatoHV.pdf')" type="button">Formato Hoja de Vida</button>
+                <button class="w-100 btn btn-primary-udc btn-sm" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Instructivo del Aplicativo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      
     </div>
+  </div>
+  <hr class="featurette-divider">
+  <div class="jumbotron p-3 text-white rounded bg-gray">
+  <div class="row featurette">
+    <div class="text-center">
+      <h5 class="display-12 fw-bold text-udc mb-4">
+        Concurso público de meritos para docentes de plata de tiempo completo y medio tiempo 2023</h5>
+    
     <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-      <button type="button" [routerLink]="'/convocatoria/participante'" class="btn btn-primary btn-lg px-4 gap-3">Inscripción</button>
-      <button type="button" [routerLink]="'/convocatoria/documentos'" class="btn btn-outline-secondary btn-lg px-4">Subir Documentos</button>
+      <button type="button" [routerLink]="'/convocatoria/participante'" 
+      class="btn btn-primary-udc2 btn-lg px-4 gap-3">1. Inscripción</button>
+      <button type="button" [routerLink]="'/convocatoria/documentos'" 
+      class="btn btn-outline-secondary btn-lg px-4">2. Subir Documentos</button>
     </div>
+    </div>
+  </div>
+  </div>
+  <hr class="featurette-divider">
+   
 </main>

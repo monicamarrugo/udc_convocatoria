@@ -1,38 +1,44 @@
-<div class="container">
+<div class="container mt-4 mb-4">
   <div class="row">
     <div class="col-md-8">
-        <h4 class="mb-3"> Inscripción Convocatoria</h4>
+        <h4 class="mb-4"> Documentos Convocatoria</h4>
         <form [formGroup] = "documentoForm" (ngSubmit)="saveDocumento()"class="needs-validation" novalidate>
 
           <div class="row g-3">
             <div class="col-md-5">
-                <label for="convocatoria" class="form-label"> Convocatoria Abierta</label>
-                <select class="form-select" id="convocatoria" formControlName="convocatoria" required #convocatoria>
-                  <option value="">Seleccione Convocatoria...</option>
-                  <option value="1">Convocatoria 01999</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please Seleccione Convocatoria.
-                </div>
+              <mat-form-field class="full-width">
+                <mat-label> Convocatoria Abierta</mat-label>
+                  <mat-select id="convocatoria" [(value)]="selectedConvocatoria" formControlName="convocatoria" required #convocatoria>
+                    <mat-option *ngFor="let convocatoria of conovocatorias" [value]="convocatoria.codigo">{{convocatoria.nombre}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="documentoForm.controls['convocatoria'].hasError('required')">
+                    Por favor Seleccione Convocatoria.
+                </mat-error>
+                </mat-form-field>
               </div>
 
               <div class="col-sm-5">
-                <label for="codigoInscripcion"  class="form-label">Código Inscripción</label>
-                <input type="text" class="form-control" (ngModelChange)="listDocumento()" id="codigoInscripcion" formControlName="codigoInscripcion" required #codigoInscripcion>
-                <div class="invalid-feedback">
+                <mat-form-field class="full-width">
+                  <mat-label>Código Inscripción</mat-label>
+                  <input matInput id="codigoInscripcion" (ngModelChange)="listDocumento()"
+                  formControlName="codigoInscripcion" required #codigoInscripcion>
+                  <mat-error *ngIf="documentoForm.controls['codigoInscripcion'].hasError('required')">
                     Por favor ingrese el codigo de su inscripción.
-                </div>
+                  </mat-error>
+              </mat-form-field>
               </div>
 
               <div class="col-md-5">
-                <label for="tipoDocumento" class="form-label"> Tipo de Documento</label>
-                <select class="form-select" id="tipoDocumento" formControlName="tipoDocumento" required #tipoDocumento>
-                  <option value="" disabled selected hidden >Seleccione tipo documento</option>
-                  <option *ngFor="let tipo of lTiposDocumento" [ngValue]="tipo.codigo">{{tipo.descripcion}}</option>
-                </select>
-                <div class="invalid-feedback">
-                  Please Seleccione tipo documento.
-                </div>
+                <mat-form-field class="full-width">
+                  <mat-label> Tipo Documento</mat-label>
+                    <mat-select id="tipoDocumento" formControlName="tipoDocumento" required #tipoDocumento>
+                      <mat-option value="" disabled selected >Seleccione Tipo Documento</mat-option>
+                    <mat-option *ngFor="let tipo of lTiposDocumento" [value]="tipo.codigo">{{tipo.descripcion}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="documentoForm.controls['tipoDocumento'].hasError('required')">
+                      Por favor Seleccione Tipo Documento.
+                  </mat-error>
+                  </mat-form-field>
               </div>
               <div class="col-ms-5">
                 <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo>
@@ -46,29 +52,33 @@
           
           <hr class="my-4">            
 
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Subir Documento</button>
+          <button [disabled]="disableSave" class="w-100 btn btn-primary-udc2  btn-lg" type="submit">Subir Documento</button>
         </form>
     </div>
     <div class="col-md-4">
-      <h2 class="mb-3"> ¡Estado de documentos!</h2>
+      <h4 class="mb-2"> Documentos por subir</h4>
+      <span class="badge badge-success">Subidos</span>
+      <span class="badge badge-danger mb-2">Faltantes</span>
+
       <div *ngFor="let ds of lDocumentosSubidos" class="input-group mb-3">
         <div class="input-group-prepend">
           <div *ngIf="ds.subido" class="input-group-text btn btn-success" id="btnGroupAddon2">
             <i class="bi bi-check-circle-fill"></i></div>
-            <div *ngIf="!ds.subido" class="input-group-text btn btn-danger" id="btnGroupAddon2">
-              <i class="bi bi-check-circle-fill"></i></div>
+            <div *ngIf="!ds.subido || ds.subido == undefined " class="input-group-text btn btn-danger" id="btnGroupAddon2">
+              <i class="bi bi-x-circle-fill"></i></div>
         </div>
         <input type="text" disabled="true" [(ngModel)]="ds.descripcion" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
       </div>
      
       
     </div>
+    
   </div>
-
+  <hr class="featurette-divider">
       <div class="row">
         <div class="col-md-12 order-md-2">  
             <div class="row">
-              <h2 class="mb-3"> Lista de documentos</h2>
+              <h4 class="mb-3"> Documentos Subidos</h4>
               <div class="table-responsive">
                 <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>
                   

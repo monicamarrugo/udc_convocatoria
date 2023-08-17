@@ -20,7 +20,7 @@ export class DocumentosService extends AppRequest {
     ) {
     super(http);
     this.baseUrl = environment.convocatoriaApiUrl;
-    this.addHeader([{Key: 'Authorization', Value: localStorage.getItem('token') || '' }]);
+    //this.addHeader([{Key: 'Authorization', Value: localStorage.getItem('token') || '' }]);
   }
 
    /**
@@ -32,28 +32,22 @@ export class DocumentosService extends AppRequest {
   saveDocumento(datosDocumento:any): Observable<any> {  
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
-    return this.http.post<any>('https://localhost:7045/api/Documento/subir', datosDocumento, { headers });
-      //const url =  `/api/Documento/subir`;
-      //return this.postRequest(url, datosDocumento);
+    return this.http.post<any>(environment.convocatoriaApiUrl +'/api/Documento/subir', datosDocumento, { headers });
+      
     }
 
   listDocumento(codigoInscripcion:string): Observable<ResponseDocumento[]> {
-    const url =  `https://localhost:7045/api/Documento/listar?codigoInscripcion=${codigoInscripcion}`;
-    return this.http.get<ResponseDocumento[]>(url);
+    const url =  `/api/Documento/listar?codigoInscripcion=${codigoInscripcion}`;
+    return this.getRequest<ResponseDocumento[]>(url);
   }
 
   downloadFile(fileName:string) {
-
-   
-    const apiUrl = `https://localhost:7045/api/Documento/descargar?fileName=${fileName}`; // Cambia la URL según tu configuración
-
+    const apiUrl = `${this.baseUrl}/api/Documento/descargar?fileName=${fileName}`; // Cambia la URL según tu configuración
     const requestData = { fileName: fileName };
-
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'responseType': 'blob'
     });
-
     return this.http.post<any>(apiUrl, requestData, { headers: headers, responseType: 'blob' as 'json' });
   }
 
