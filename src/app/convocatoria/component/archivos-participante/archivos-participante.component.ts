@@ -35,7 +35,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
    groupColumns = ['tipoDocumento'];
    dataColumns = ['contenido', 'descTipodocumento'];
    disableSave:boolean=false;
-   conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 01999', fechaInicio:'', fechaFin:'', activo: true}];
+   conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 02046', fechaInicio:'', fechaFin:'', activo: true}];
    public selectedConvocatoria:string='1';
   constructor(
     private documentoService: DocumentosService,

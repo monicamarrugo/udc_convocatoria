@@ -32,7 +32,7 @@ export class RegistroParticipanteComponent  implements OnInit {
   disableSave:boolean=false;
   public selectedConvocatoria:string='1';
   patronEmail = "^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$";
-  conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 01999', fechaInicio:'', fechaFin:'', activo: true}];
+  conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 02046', fechaInicio:'', fechaFin:'', activo: true}];
   selectedOption: string = 'Opción 2'; // Valor por defecto
   constructor(
     private formBuilder: FormBuilder,
