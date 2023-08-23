@@ -169,6 +169,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
                             });
                     }
                     else{
+                      this.disableSave=false;
                       var dConfirm = this._dialog.open(CustomModalComponent,
                             { width: '450px',
                               data: {

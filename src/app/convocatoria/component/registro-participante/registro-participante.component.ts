@@ -122,14 +122,18 @@ public saveInscripcion():void {
                                   this.router.navigate(['/convocatoria/documentos']);
                                 });
                         }else{
-
-                          this._dialog.open(CustomModalComponent,
+                          this.disableSave = false;
+                          var dConfirmError = this._dialog.open(CustomModalComponent,
                                 { width: '450px',
                                   data: {
                                     mensaje: "¡Atención!: \n "+ result.errorDetail,
                                   tipoMensaje: TipoMensajeEnum.success
                                 }
                               });  
+
+                            dConfirmError.afterClosed().subscribe(result => {
+                                  this.disableSave = false;
+                                });
                         }
                   });
             }
