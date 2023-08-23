@@ -54,7 +54,6 @@ export class RegistroParticipanteComponent  implements OnInit {
       telefono:['', [Validators.required, Validators.maxLength(10), Validators.pattern('^[0-9_ ]*$')],],
       descripcion:[{value: '', disabled: true}],
       aceptoPoliticas:['', Validators.required],
-      aceptoTerminos:['', Validators.required],
       aceptoCorreos:['', Validators.required],
       aceptoVeraz:['', Validators.required],
       aceptoCustodiar:['', Validators.required]
@@ -113,7 +112,7 @@ public saveInscripcion():void {
                           var dConfirm = this._dialog.open(CustomModalComponent,
                                 { width: '450px',
                                   data: {
-                                  mensaje: "Se ha generado el siguiente código de inscripcion \n "+ result.respuesta,
+                                  mensaje: "Se ha generado el siguiente código de inscripción \n ¡¡Por favor guardelo. Es necesario para continuar el proceso!! \n "+ result.respuesta,
                                   tipoMensaje: TipoMensajeEnum.success
                                 }
                               });  

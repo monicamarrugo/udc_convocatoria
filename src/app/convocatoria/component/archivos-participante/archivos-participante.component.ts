@@ -72,7 +72,42 @@ export class ArchivosParticipanteComponent  implements OnInit {
   }
 
   onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
+    const selectedFile = event.target.files[0];
+    const maxSizeInBytes = 5242880;
+    if (selectedFile.size > maxSizeInBytes) {
+      var dConfirm = this._dialog.open(CustomModalComponent,
+            { width: '450px',
+              data: {
+              mensaje: "El archivo seleccionado supera el tamaño máximo permitido!",
+              tipoMensaje: TipoMensajeEnum.warning
+            }
+          });
+        dConfirm.afterClosed().subscribe(result => {
+          this.documentoForm.controls['archivo'].setValue(
+            this.nonSelectedOptionValue
+          );
+          this.selectedFile = null;
+      
+        });
+    }
+    if (selectedFile && selectedFile.type === 'application/pdf'){
+      this.selectedFile = event.target.files[0];
+    }else{
+      var dConfirm = this._dialog.open(CustomModalComponent,
+            { width: '450px',
+              data: {
+              mensaje: "Solo se permite documentos de tipo PDF!",
+              tipoMensaje: TipoMensajeEnum.warning
+            }
+          });
+        dConfirm.afterClosed().subscribe(result => {
+          this.documentoForm.controls['archivo'].setValue(
+            this.nonSelectedOptionValue
+          );
+          this.selectedFile = null;
+      
+        });
+    }
   }
   listDocumento(){
     let codigo = this.documentoForm.controls["codigoInscripcion"].value;

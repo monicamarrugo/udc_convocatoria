@@ -41,11 +41,12 @@
                   </mat-form-field>
               </div>
               <div class="col-ms-5">
-                <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo>
+                <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo accept=".pdf">
                       <div *ngIf="uploadResponse">
                         <p>{{ uploadResponse.mensaje }}</p>
                         <label *ngIf="uploadResponse.error == 'NO'" >Archivo subido con exito!</label>
-                      </div>
+                      </div><br>
+                      <span>Solo se acepta archivos de tipo PDF y un tamaño máximo de 5MB</span>
               </div>
 
           </div>  
