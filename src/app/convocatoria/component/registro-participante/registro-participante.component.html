@@ -115,20 +115,13 @@
           <div class="form-check mb-2">
            
             <mat-checkbox [required]="true" [(ngModel)]="isCheckedPoliticas" matInput formControlName="aceptoPoliticas">
-              Acepto las politicas de privacidad publicadas en el sitio web de la Universidad
+              Autorizo el tratamiento de mis datos personales para fines misionales y administrativos, 
+              atendiendo el mandato legal, conforme a las politicas publicadas en la pagina web de la UdeC (Habeas Data)
             </mat-checkbox>
             <mat-error *ngIf="registroForm.controls['aceptoPoliticas'].hasError('required')">
               Es requerido que acepte.
             </mat-error>
-          </div>
-          <div class="form-check mb-2">
-            <mat-checkbox [required]="true" [(ngModel)]="isCheckedTerminos" matInput formControlName="aceptoTerminos">
-              Acepto los terminos y condiciones publicados en este sitio
-            </mat-checkbox>
-            <mat-error *ngIf="registroForm.controls['aceptoTerminos'].hasError('required')">
-              Es requerido que acepte.
-            </mat-error>
-          </div>
+          </div>          
           <div class="form-check mb-2">
             <mat-checkbox [required]="true" [(ngModel)]="isCheckedCorreos" matInput formControlName="aceptoCorreos">
               Autorizo recibir correos de este sitio web y eliminar cualquier tipo de bloqueos
