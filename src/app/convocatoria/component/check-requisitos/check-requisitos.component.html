@@ -1,0 +1,63 @@
+<div class="container mt-4 mb-4">
+    <div class="row">
+      <div class="col-md-12 text-center">
+          <h4 class="mb-4"> Evaluar Requisitos Mínimos</h4>
+      </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-12 order-md-2">  
+            <div class="row">
+                <div class="table-responsive">
+                <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>                   
+                  <ng-container matColumnDef="nombreTipoDocumento">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Tipo Documento </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombreTipoDocumento}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="cumplido">
+                    <th mat-header-cell *matHeaderCellDef>No/Si</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="row">
+                        <div  class="col" matTooltip="Si">
+                        <mat-slide-toggle #activar
+                        [checked]="element.cumplido== true ? true : false"
+                        (change)="cumplido(element, activar)"
+                        >
+                        </mat-slide-toggle>
+                      </div>
+                      </div>
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="observacion">
+                    <th mat-header-cell *matHeaderCellDef>Observacion</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="row">
+                        <div  class="col" matTooltip="Observacion">
+                            <textarea [(ngModel)]="element.observacion" placeholder="Observaciones" rows="3" cols="50">
+                            </textarea>
+                      </div>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-md-4 "> 
+        </div>
+        <div class="col-md-1"> 
+            <button mat-raised-button matTooltip="Cerrar" (click)='close()'>Cerrar</button>
+        </div>
+        <div class="col-md-1"> 
+            <button color="warn" mat-raised-button matTooltip="Guardar" (click)='save()'>Guardar</button>
+        </div>
+        <div class="col-md-5 "> 
+        </div>
+      </div>
+</div>

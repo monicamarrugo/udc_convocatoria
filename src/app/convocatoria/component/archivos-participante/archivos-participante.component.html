@@ -20,7 +20,7 @@
               <div class="col-sm-5">
                 <mat-form-field class="full-width">
                   <mat-label>Código Inscripción</mat-label>
-                  <input matInput id="codigoInscripcion" (ngModelChange)="listDocumento()"
+                  <input matInput id="codigoInscripcion" [(ngModel)]="codigoEnMayusculas" (ngModelChange)="listDocumento()"
                   formControlName="codigoInscripcion" required #codigoInscripcion>
                   <mat-error *ngIf="documentoForm.controls['codigoInscripcion'].hasError('required')">
                     Por favor ingrese el codigo de su inscripción.

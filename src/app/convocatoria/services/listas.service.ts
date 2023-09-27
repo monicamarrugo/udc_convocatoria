@@ -4,7 +4,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AppRequest } from 'src/app/core/base/request/app-request';
 import { environment } from 'src/environments/environment';
-import { Item } from 'src/app/convocatoria/model/item'
+import { Item } from 'src/app/convocatoria/model/item';
+import {Comision} from 'src/app/convocatoria/model/comision';
+import {FacultadPerfil} from 'src/app/convocatoria/model/facultad-perfil';
 
 @Injectable({
     providedIn: 'root',
@@ -44,6 +46,15 @@ import { Item } from 'src/app/convocatoria/model/item'
 
   getTiposDocumento(): Observable<Item[]> {
     const url = `/api/ListasTiposBasicos/GetListaTiposDocumentos`;
+    return this.getRequest(url);
+  }
+
+  getComisiones(): Observable<Comision[]> {
+    const url = `/api/Convocatoria/listarComision`;
+    return this.getRequest(url);
+  }
+  getPerfilesComision(idComision:number): Observable<FacultadPerfil[]> {
+    const url = `/api/ListasTiposBasicos/GetListaFacultadPerfil?idComision=${idComision}`
     return this.getRequest(url);
   }
 

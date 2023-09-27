@@ -50,6 +50,15 @@ export class DocumentosService extends AppRequest {
     });
     return this.http.post<any>(apiUrl, requestData, { headers: headers, responseType: 'blob' as 'json' });
   }
+  descargarDocumentosZip(codigoInscripcion:string) {
+    const apiUrl = `${this.baseUrl}/api/Documento/descargarDocumentos?codigoInscripcion=${codigoInscripcion}`; // Cambia la URL según tu configuración
+    const requestData = { codigoInscripcion: codigoInscripcion };
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/zip',
+      'responseType': 'blob'
+    });
+    return this.http.post<any>(apiUrl, requestData, { headers: headers, responseType: 'blob' as 'json' });
+  }
 
 
 

@@ -1,0 +1,22 @@
+<body class="text-center">
+    
+    <form [formGroup] = "loginForm" (ngSubmit)="ingresar()" class="form-signin" novalidate>
+      <h1 class="h3 mb-3 font-weight-normal">Convocatorias</h1>
+       <mat-form-field class="full-width">
+        <mat-label class="sr-only">Nombre Usuario:</mat-label>
+        <input matInput id="nombreUsuario" formControlName="nombreUsuario" value="" required #nombreUsuario>
+        <mat-error *ngIf="loginForm.controls['nombreUsuario'].hasError('required')">
+          Por favor ingrese Nombre Usuario.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label class="sr-only">Contraseña:</mat-label>
+        <input type="password" matInput id="contrasena"  formControlName="contrasena" value="" required #contrasena>
+        <mat-error *ngIf="loginForm.controls['contrasena'].hasError('required')">
+          Por favor ingrese Contraseña.
+        </mat-error>
+      </mat-form-field>
+      
+      <button class="btn btn-lg btn-primary-udc2 btn-block" type="submit">Ingresar</button>
+    </form>
+</body>

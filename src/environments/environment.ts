@@ -1,6 +1,6 @@
 export const environment = {
-    production: false,
-    host: 'http://localhost:4200',
+    production: true,
+    host: 'http://181.215.197.28',
     host_email: 'http://localhost:4200',
-    convocatoriaApiUrl: 'https://localhost:7045'
+    convocatoriaApiUrl: 'http://181.215.197.28:8080'
 }

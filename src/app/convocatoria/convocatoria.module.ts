@@ -6,12 +6,19 @@ import { ConvocatoriaRoutingModule } from './convocatoria.routing';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../modules/material.module';
+import { RequisitosMinimosComponent } from './component/requisitos-minimos/requisitos-minimos.component';
+import { CheckRequisitosComponent } from './component/check-requisitos/check-requisitos.component';
+import {AuthorizatedGuard} from '../core/guard/authorizated.guard';
+import { PantallaActaComponent } from './component/pantalla-acta/pantalla-acta.component';
 
 
 @NgModule({
   declarations: [
     RegistroParticipanteComponent,
-    ArchivosParticipanteComponent
+    ArchivosParticipanteComponent,
+    RequisitosMinimosComponent,
+    CheckRequisitosComponent,
+    PantallaActaComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +27,7 @@ import { MaterialModule } from '../modules/material.module';
     ReactiveFormsModule,
     MaterialModule,
     
-  ]
+  ],
+  providers: [AuthorizatedGuard],
 })
 export class ConvocatoriaModule { }

@@ -4,6 +4,7 @@ import { AppRequest } from 'src/app/core/base/request/app-request';
 import { environment } from 'src/environments/environment';
 import { Observable } from "rxjs";
 import { Convocatoria } from '../model/dtos/convocatoria';
+import { Comision } from '../model/comision';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,10 @@ export class ConvocatoriaService extends AppRequest {
     const url =  `/api/Convocatoria/obtenerConvocatoria?idConvocatoria=${codigoConvocatoria}`;
     return this.getRequest(url);
   }
-
+  login(datosUsuario:any): Observable<Comision> {     
+        const url =  `/api/Convocatoria/autenticarComision`;
+        return this.postRequest(url, datosUsuario);
+      }
 
 
 }

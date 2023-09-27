@@ -8,8 +8,8 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import {ConfirmacionComponent} from 'src/app/widgets/confirmacion/confirmacion.component';
 import {CustomModalComponent,TipoMensajeEnum} from 'src/app/widgets/custom-modal/custom-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { Item } from 'src/app/convocatoria/model/item'
-import { ListasService} from '../../services/listas.service'
+import { Item } from 'src/app/convocatoria/model/item';
+import { ListasService} from '../../services/listas.service';
 import { Convocatoria } from '../../model/dtos/convocatoria';
 import { ConvocatoriaService } from '../../services/convocatoria.service';
 
@@ -37,6 +37,8 @@ export class ArchivosParticipanteComponent  implements OnInit {
    disableSave:boolean=false;
    conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 02046', fechaInicio:'', fechaFin:'', activo: true}];
    public selectedConvocatoria:string='1';
+   codigoEnMayusculas: string = '';
+
   constructor(
     private documentoService: DocumentosService,
     private formBuilder: FormBuilder,
@@ -46,7 +48,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
     
       this.dataSource = new MatTableDataSource<ResponseDocumento>([]);
     this.documentoForm = this.formBuilder.group({
-      codigoInscripcion: ['', Validators.required],
+      codigoInscripcion: [this.codigoEnMayusculas, Validators.required],
       tipoDocumento:['', Validators.required],
       archivo:['', Validators.required],
       convocatoria:['1', Validators.required]
@@ -110,8 +112,10 @@ export class ArchivosParticipanteComponent  implements OnInit {
     }
   }
   listDocumento(){
-    let codigo = this.documentoForm.controls["codigoInscripcion"].value;
+    
+    let codigo = this.documentoForm.controls["codigoInscripcion"].value.toUpperCase();
     if(codigo){
+      this.codigoEnMayusculas = this.codigoEnMayusculas.toUpperCase();
       this.documentoService.listDocumento(codigo)
       .subscribe({
         next: (documentos: ResponseDocumento[]) => {     
@@ -142,8 +146,6 @@ export class ArchivosParticipanteComponent  implements OnInit {
             d.subido=false;
         });
       }
-      console.log(" this.lDocumentosSubidos");
-      console.log(this.lDocumentosSubidos);
   }
   private getTiposDocumento() {
     this.documentoForm.controls['tipoDocumento'].setValue(
@@ -170,7 +172,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
     this.disableSave=true;
     const formData = new FormData();
     formData.append('file', this.selectedFile);
-    formData.append('codigoInscripcion', this.documentoForm.controls["codigoInscripcion"].value);
+    formData.append('codigoInscripcion', this.documentoForm.controls["codigoInscripcion"].value.toUpperCase());
     formData.append('tipoDocumento', this.documentoForm.controls["tipoDocumento"].value);
 
         const dialogRef = this._dialog.open(ConfirmacionComponent, {

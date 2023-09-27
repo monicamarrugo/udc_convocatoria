@@ -1,0 +1,21 @@
+@media print {
+    .ocultar-en-pantalla {
+      display: none; /* O el valor de display apropiado */
+    }
+
+    body {
+        background: #fff !important;
+    }
+    header {
+        box-shadow: none;
+        background: #fff !important;
+    }
+    .cdk-overlay-container {
+        display: none !important;
+      }
+
+      .contenido-a-imprimir {
+        padding: 20px;
+        margin: 0;
+      }
+  }

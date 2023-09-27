@@ -1,0 +1,74 @@
+<div class="container mt-4 mb-4 contenido-a-imprimir">
+    <div class="row">
+      <div class="col-md-12">
+       
+                  <div class="col-12 mx-auto mb-3">
+                      <div class="row">
+                          <div class="col-12 text-center"><h2>Resultados Requisitos</h2></div>
+                      </div>
+                      <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col-4 themed-grid-col"><span>Participante</span></div>
+                          <div class="col-4 themed-grid-col">{{participante}}</div>
+                      </div>
+                      <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-4 themed-grid-col"><span>Numero Identificación</span></div>
+                        <div class="col-4 themed-grid-col">{{identificacion}}</div>
+                    </div>
+                      <div class="row mb-3">
+                          <div class="col-2"></div>
+                          <div class="col-4 themed-grid-col"><span>Código Inscripción</span></div>
+                          <div class="col-4 themed-grid-col">{{inscripcion}}</div>
+                      </div>
+                  </div>
+         
+      </div>
+    </div>
+
+    <div class="row g-3">
+        <div class="col-md-12 order-md-2">  
+            <div class="row">
+                <div class="table-responsive">
+                <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>                   
+                  <ng-container matColumnDef="nombreTipoDocumento">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Tipo Documento </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombreTipoDocumento}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="cumplido">
+                    <th mat-header-cell *matHeaderCellDef>Cumplido</th>
+                    <td mat-cell *matCellDef="let element"> {{element.cumplido== true ? "SI" : "NO"}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="observacion">
+                    <th mat-header-cell *matHeaderCellDef>Observacion</th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="row">
+                        <div  class="col" matTooltip="Observacion">
+                            <textarea [(ngModel)]="element.observacion" disabled="disable" placeholder="Ninguna" rows="3" cols="50">
+                            </textarea>
+                      </div>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  
+                </table>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row g-3 ocultar-en-pantalla">
+        <div class="col-md-4 "> 
+        </div>
+        <div class="col-md-1"> 
+            <button mat-raised-button (click)='close()'>Cerrar</button>
+        </div>
+        <div class="col-md-1"> 
+            <button color="warn" mat-raised-button (click)='imprimirPagina()'>Imprimir</button>
+        </div>
+        <div class="col-md-5 "> 
+        </div>
+      </div>
+</div>
