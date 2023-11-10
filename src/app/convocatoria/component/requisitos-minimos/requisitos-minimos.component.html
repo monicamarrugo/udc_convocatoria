@@ -1,14 +1,23 @@
 <div class="container mt-4 mb-4">
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-md-10"></div>
     <div class="col-md-2">
-      <div class="plogout"> <button type="button" (click)="logout()" class="btn btn-sm"><mat-icon>launch</mat-icon>Cerrar Sesion</button></div>  
+      <div class="plogout no-mostrar-en-impresion"> <button type="button" (click)="logout()" class="btn btn-sm"><mat-icon>launch</mat-icon>Cerrar Sesion</button></div>  
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <h4 class="mb-4 no-mostrar-en-impresion"> Verificación Hoja de Vida</h4>
+    </div>
+    <div class="col-md-7"></div>
+    <div class="col-md-2">
+      <button class="no-mostrar-en-impresion w-100 btn btn-primary-udc2 mb-4"  type="button" (click)="verConsolidado()">Ver Consolidado</button>
     </div>
   </div>
     <div class="row">
-      <div class="col-md-10">
-          <h4 class="mb-4"> Requisitos Mínimos</h4>
-          <form [formGroup] = "requisitosForm" class="needs-validation" novalidate>
+      <div class="col-md-12">
+          
+          <form [formGroup] = "requisitosForm" class="needs-validation no-mostrar-en-impresion" novalidate>
            <div class="row g-3">
             <mat-form-field class="full-width">
                 <mat-label>Perfiles</mat-label>
@@ -23,14 +32,14 @@
             </mat-form-field>
           </div>
           </form>   
-          <hr class="featurette-divider">
+          <hr class="featurette-divider no-mostrar-en-impresion">
           <div *ngIf="mostrarNoResultados" class="row g-3">
             <span>No se encontraron resultados para la consulta</span>
           </div>
-          <div *ngIf="mostrarResultados" class="row">
+          <div *ngIf="mostrarResultados" class="row no-mostrar-en-impresion">
             <div class="col-md-12 order-md-2">  
                 <div class="row">
-                  <h4 class="mb-3">Participantes Inscritos</h4>
+                  <h4 class="mb-3">Participantes Inscritos ({{totalInscripciones}})</h4>
                     <div class="table-responsive">
                     <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>                   
                       <ng-container matColumnDef="nombres">
@@ -45,6 +54,7 @@
                         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Número Inscripción </th>
                         <td mat-cell *matCellDef="let element"> {{element.codigoInscripcion}} </td>
                       </ng-container>
+                     
                       <ng-container matColumnDef="acciones">
                         <th mat-header-cell *matHeaderCellDef>Acciones</th>
                         <td mat-cell *matCellDef="let element">
@@ -65,19 +75,25 @@
                           </div>
                         </td>
                       </ng-container>
-                     
-    
                       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                      
                     </table>
-                    <mat-paginator [length]="totalInscripciones"
-                      [pageSize]="10"
-                      [pageSizeOptions]="[10, 20]"
-                      aria-label="Select page"></mat-paginator>
                   </div>
                 </div>
+                
             </div>
+          </div>
+          <div *ngIf="parameters !=undefined" class="row">
+              <div class="col-md-10"></div>
+              <div class="col-md-2">
+                <div class="plogou no-mostrar-en-impresion"> <button mat-raised-button matTooltip="Seguir Evaluando" (click)='volver()'>Volver al listado</button></div>  
+              </div> 
+            <app-hoja-vida [parameters]="parameters"></app-hoja-vida>
+            
+
+          </div>
+          <div *ngIf="listaPerfiles !=undefined" class="row">
+            <app-consolidado-hv [listaPerfiles]="listaPerfiles"></app-consolidado-hv>
           </div>
       </div>
     </div>

@@ -1,50 +1,73 @@
-<div class="container mt-4 mb-4 contenido-a-imprimir">
-    <div class="row">
-      <div class="col-md-12">
-       
-                  <div class="col-12 mx-auto mb-3">
-                      <div class="row">
-                          <div class="col-12 text-center"><h2>Resultados Requisitos</h2></div>
-                      </div>
-                      <div class="row">
-                          <div class="col-2"></div>
-                          <div class="col-4 themed-grid-col"><span>Participante</span></div>
-                          <div class="col-4 themed-grid-col">{{participante}}</div>
-                      </div>
-                      <div class="row">
-                        <div class="col-2"></div>
-                        <div class="col-4 themed-grid-col"><span>Numero Identificación</span></div>
-                        <div class="col-4 themed-grid-col">{{identificacion}}</div>
-                    </div>
-                      <div class="row mb-3">
-                          <div class="col-2"></div>
-                          <div class="col-4 themed-grid-col"><span>Código Inscripción</span></div>
-                          <div class="col-4 themed-grid-col">{{inscripcion}}</div>
-                      </div>
-                  </div>
+<div class="container mt-4 mb-4">
+  
+    <div class="row ocultar-en-pantalla">
+      <div class="col-md-12 mb-5">
+        <h4 class="mb-4"> Resultados Requisitos Mínimos</h4>
+          <form [formGroup] = "requisitosForm" class="needs-validation" novalidate>
+           <div class="row g-3">
+            <mat-form-field class="full-width">
+                <mat-label>Perfiles</mat-label>
+                <mat-select matInput [(value)]="selectedPerfil" id="codigoPerfil" (selectionChange)="buscarEvaluadosPerfil($event)" formControlName="codigoPerfil" 
+                required #codigoPerfil>
+                  <mat-option value="" disabled selected >Por favor Seleccione el perfil a consultar</mat-option>
+                  <mat-option *ngFor="let perfil of lPerfiles" [value]="perfil.codigo">{{perfil.codigo}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="requisitosForm.controls['codigoPerfil'].hasError('required')">
+                    Por favor Seleccione Perfil.
+                </mat-error>
+            </mat-form-field>
+          </div>
+          </form>
          
       </div>
     </div>
-
-    <div class="row g-3">
-        <div class="col-md-12 order-md-2">  
+    <hr class="featurette-divider">
+    <div *ngIf="loading" class="loading">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+  </div>
+    <div *ngIf="mostrarNoResultados" class="row">
+      <span>No se encontraron resultados para la consulta</span>
+    </div>
+    <div *ngIf="mostrarResultados" class="row">
+        <div class="col-md-12 order-md-2 contenido-a-imprimir">  
             <div class="row">
+              <h4 class="mb-3">Participantes Inscritos ({{totalInscripciones}})</h4>
                 <div class="table-responsive">
                 <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>                   
-                  <ng-container matColumnDef="nombreTipoDocumento">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Tipo Documento </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nombreTipoDocumento}} </td>
+                  <ng-container matColumnDef="codigoInscripcion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Código Inscripción </th>
+                    <td mat-cell *matCellDef="let element"><b>{{element.codigoInscripcion}}</b>  </td>
                   </ng-container>
-                  <ng-container matColumnDef="cumplido">
-                    <th mat-header-cell *matHeaderCellDef>Cumplido</th>
-                    <td mat-cell *matCellDef="let element"> {{element.cumplido== true ? "SI" : "NO"}} </td>
+                  <ng-container matColumnDef="did">
+                    <th mat-header-cell *matHeaderCellDef>Documento de identidad</th>
+                    <td mat-cell *matCellDef="let element"> {{element.did== true ? "SI" : "NO"}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="tpu">
+                    <th mat-header-cell *matHeaderCellDef>Título Profesional Universitario</th>
+                    <td mat-cell *matCellDef="let element"> {{element.tpu== true ? "SI" : "NO"}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="tmd">
+                    <th mat-header-cell *matHeaderCellDef>Titulo Maestría y/o Doctorado</th>
+                    <td mat-cell *matCellDef="let element"> {{element.tmd== true ? "SI" : "NO"}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="ced">
+                    <th mat-header-cell *matHeaderCellDef>Certificados de Experiencia Profesional/Docente</th>
+                    <td mat-cell *matCellDef="let element"> {{element.ced== true ? "SI" : "NO"}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="cci">
+                    <th mat-header-cell *matHeaderCellDef>Certificados De Competencia En Lengua Inglesa</th>
+                    <td mat-cell *matCellDef="let element"> {{element.cci== true ? "SI" : "NO"}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="adm">
+                    <th mat-header-cell *matHeaderCellDef>ADMITIDO</th>
+                    <td mat-cell *matCellDef="let element"> <b>{{element.adm== true ? "SI" : "NO"}}</b></td>
                   </ng-container>
                   <ng-container matColumnDef="observacion">
-                    <th mat-header-cell *matHeaderCellDef>Observacion</th>
+                    <th mat-header-cell *matHeaderCellDef>Observación</th>
                     <td mat-cell *matCellDef="let element">
                       <div class="row">
                         <div  class="col" matTooltip="Observacion">
-                            <textarea [(ngModel)]="element.observacion" disabled="disable" placeholder="Ninguna" rows="3" cols="50">
+                            <textarea [(ngModel)]="element.observacion" disabled="disable" rows="5" cols="30">
                             </textarea>
                       </div>
                       </div>
@@ -57,18 +80,6 @@
                 </table>
               </div>
             </div>
-        </div>
-      </div>
-      <div class="row g-3 ocultar-en-pantalla">
-        <div class="col-md-4 "> 
-        </div>
-        <div class="col-md-1"> 
-            <button mat-raised-button (click)='close()'>Cerrar</button>
-        </div>
-        <div class="col-md-1"> 
-            <button color="warn" mat-raised-button (click)='imprimirPagina()'>Imprimir</button>
-        </div>
-        <div class="col-md-5 "> 
         </div>
       </div>
 </div>

@@ -5,6 +5,7 @@
 
     body {
         background: #fff !important;
+        font-size: 8pt;
     }
     header {
         box-shadow: none;
@@ -15,7 +16,7 @@
       }
 
       .contenido-a-imprimir {
-        padding: 20px;
+        padding: 0;
         margin: 0;
       }
   }

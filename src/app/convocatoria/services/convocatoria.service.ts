@@ -42,7 +42,18 @@ export class ConvocatoriaService extends AppRequest {
   login(datosUsuario:any): Observable<Comision> {     
         const url =  `/api/Convocatoria/autenticarComision`;
         return this.postRequest(url, datosUsuario);
-      }
+  }
+
+  getVerificacionHojaVida(codigoInscripcion:string): Observable<any> {
+    const url =  `/api/Convocatoria/buscarEvaluacionHojaVida?codigoInscripcion=${codigoInscripcion}`;
+    return this.getRequest(url);
+  }
+
+  getConsolidadoVerificacionHojaVida(listaPerfiles:string[]): Observable<any> {
+    const url =  `/api/Convocatoria/consolidadoHojaVida`;
+    return this.postRequest(url, listaPerfiles);
+
+  }
 
 
 }

@@ -19,7 +19,7 @@
                     <td mat-cell *matCellDef="let element">
                       <div class="row">
                         <div  class="col" matTooltip="Si">
-                        <mat-slide-toggle #activar
+                        <mat-slide-toggle #activar disabled="disable"
                         [checked]="element.cumplido== true ? true : false"
                         (change)="cumplido(element, activar)"
                         >
@@ -33,7 +33,7 @@
                     <td mat-cell *matCellDef="let element">
                       <div class="row">
                         <div  class="col" matTooltip="Observacion">
-                            <textarea [(ngModel)]="element.observacion" placeholder="Observaciones" rows="3" cols="50">
+                            <textarea disabled="disable" [(ngModel)]="element.observacion" placeholder="Observaciones" rows="3" cols="50">
                             </textarea>
                       </div>
                       </div>
@@ -53,9 +53,6 @@
         </div>
         <div class="col-md-1"> 
             <button mat-raised-button matTooltip="Cerrar" (click)='close()'>Cerrar</button>
-        </div>
-        <div class="col-md-1"> 
-            <button color="warn" mat-raised-button matTooltip="Guardar" (click)='save()'>Guardar</button>
         </div>
         <div class="col-md-5 "> 
         </div>

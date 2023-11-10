@@ -1,0 +1,341 @@
+
+
+<div class="mostrar-en-impresion" style="width:100%">
+         <table class="tablahv table" >
+              
+              <tbody>
+                  <tr>
+                      <td colspan="2"><b>ESTUDIO DE HOJA DE VIDA</b></td>
+                  </tr>
+                  <tr>
+                      <td>FACULTAD O INSTITUTO</td>
+                      <td>{{facultad}}</td>
+                  </tr>
+                  <tr>
+                      <td>NOMBRE DEL ASPIRANTE</td>
+                      <td>{{nombre}}</td>
+                  </tr>
+                  <tr>
+                      <td>IDENTIFICACIÓN</td>
+                      <td>{{identificacion}}</td>
+                  </tr>
+              </tbody>
+          </table>
+          <br><br>
+          
+          <table class="tablahv table table-bordered">
+              <thead>
+                  <tr>
+                      <th>ASPECTO EVALUADO</th>
+                      <th>DETALLE</th>
+                      <th>PPP*</th>
+                      <th>PMT**</th>
+                      <th>PA***</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  
+                  <tr>
+                      <td><b>FORMACIÓN POSTGRADUAL EN EL ÁREA DE LA CONVOCATORIA</b></td>
+                      <td><button [disabled] ="deshabilitado" type="button" class="no-mostrar-en-impresion" (click)="calcularFormacion()">Calcular Formación</button></td>
+                      <td></td>
+                      <td></td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="totalFormacion" type="text" name="total1" id ="total1" size="2" value="0"   /></td>
+                  </tr>
+                  <tr>
+                      <td>1.Títulos de posgrado</td>
+                      <td></td>
+                      <td></td>
+                      <td rowspan="5"><b>40</b></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>1.1.Especialización</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion1" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>10</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="formacion1" type="text" name="especializacion" size="2" id="especializacion" value="0"/></td>
+                  </tr>
+                  <tr>
+                      <td>1.2.Maestría/Especialidad en el área de la salud
+                          (reconocida por el MEN como equivalente a
+                          maestría)</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion2" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>30</td>                       
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="formacion2" type="text" name="maestria" size="2"  id="maestria"  value="0"/></td>
+                  </tr>   
+                  <tr>
+                      <td>1.3.Doctorado</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion3" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>40</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="formacion3" type="text" name="doctorado" size="2" id="doctorado"  value="0"/></td>
+
+                  </tr>   
+                  <tr>
+                      <td>1.4.Título adicional de Postgrado</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion4" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>10</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="formacion4" type="text" name="adicional" size="2" id="adicional"  value="0"/></td>
+
+                  </tr>
+                  <tr>
+                      <td><b>FORMACIÓN EN DOCENCIA UNIVERSITARIA E INGLÉS</b></td>
+                      <td><button [disabled] ="deshabilitado" type="button" class="no-mostrar-en-impresion" (click)="calcularFormacionIn()">Calcular Docencia e Inglés</button></td>
+                      <td></td>
+                      <td></td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="totalFormacionIn" type="text" name="total2" id ="total2" size="2" value="0"  /></td>
+                  </tr>
+                  <tr>
+                      <td>2.Nivel de inglés</td>
+                      <td></td>
+                      <td></td>
+                      <td rowspan="4"><B>10</B></td>
+                      <td></td>
+
+                  </tr>
+                  <tr>
+                      <td>2.1.Mínimo Nivel B1 según pruebas estipuladas en el Acuerdo.</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion5" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>7</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="fomacionIn1" type="text" name="ingles" size="2" id="ingles" value="0"/></td>
+                  </tr>
+                  <tr>
+                      <td>3.Formación en Docencia Universitaria</td>
+                      <td></td>
+                      <td></td>                        
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>3.1.Diplomado o postgrado en docencia
+                          Universitaria, Mínimo de 120 horas
+                      </td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion6"name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>7</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="fomacionIn2" type="text" name="diplomado" size="2" id="diplomado" value="0"/></td>
+                  </tr>
+                  <tr>
+                      <td><B>PRODUCCIÓN ACADÉMICA</B></td>
+                      <td><button [disabled] ="deshabilitado" type="button" class="no-mostrar-en-impresion" (click)="calcularProduccion()">Calcular Producción Académica</button></td>
+                      <td></td>
+                      <td></td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="totalProduccion" type="text" name="total3" size="2" id ="total3" value="0"  /></td>
+                  </tr>
+                  <tr>
+                      <td>4.Libros evaluados y publicados por editoriales de
+                         amplio reconocimiento nacional o internacional
+                      </td>
+                      <td></td>
+                      <td></td>
+                      <td rowspan="20"><B>30</B></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>(Máximo 5 libros ó 5 Capítulos)</td>
+                      <td></td>
+                      <td></td>                        
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>4.1.Hasta tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion7" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>8</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion1" type="text" id="libro1" size="2" value = "10"/></td>
+                  </tr>
+                  <tr>
+                      <td>4.2.Más de tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion8" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>4</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion2" type="text" id="libro2" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>5.Artículos en revistas reconocidas en Publindex.
+                          (Máximo 5 artículos en cada categoría)
+                      </td>
+                      <td></td>
+                      <td></td>                        
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>en categoría A1</td>
+                      <td></td>
+                      <td></td>                        
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>5.1.Hasta tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion9" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>8</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion3" type="text" id="libro3" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>5.2.Más de tres autores</td>
+                      <td><textarea  [disabled] ="deshabilitado" [(ngModel)]="observacion10" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>6</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion4" type="text" id="libro4" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>en categoría A2</td>
+                      <td></td>
+                      <td></td>                       
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>5.3.Hasta tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion11" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>6</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion5" type="text" id="libro5" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>5.4.Más de tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion12" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>4</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion6" type="text" id="libro6" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>en categoría B</td>
+                      <td></td>
+                      <td></td>                       
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>5.5.Hasta tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion13" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>4</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion7" type="text" id="libro7" size="2"  value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>5.6.Más de tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion14" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>2</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion8" type="text" id="libro8" size="2"  value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>en categoría C</td>
+                      <td></td>
+                      <td></td>                        
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>5.7.Hasta tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion15" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>3</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion9" type="text" id="libro9" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>5.8.Más de tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion16" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>1</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion10" type="text" id="libro10" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>6.Capítulos de libros</td>
+                      <td></td>
+                      <td></td>
+                      
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>6.1.Hasta tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion17" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>3</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion11" type="text" id="libro11" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>6.2.Más de tres autores</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion18" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>1</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="produccion12" type="text" id="libro12" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td><b>EXPERIENCIA CALIFICADA</b></td>
+                      <td><button [disabled] ="deshabilitado" type="button" class="no-mostrar-en-impresion" (click)="calcularExperiencia()">Calcular Experiencia</button></td>
+                      <td></td>
+                      <td></td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="totalExperiencia" type="text" name="total4" id ="total4" size="2" value="0" /></td>                    
+                  </tr>
+                  <tr>
+                      <td>7.Experiencia Docente Universitaria</td>
+                      <td></td>
+                      <td></td>
+                      <td rowspan="6"><B>20</B></td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>7.1.De 1 a 3 años</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion19" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>7</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="experiencia1" type="text" id="docencia1" size="2" value = "0"/></td>
+                  </tr>
+                  <tr>
+                      <td>7.2.Más de 3 años</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion20" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>10</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="experiencia2" type="text" id="docencia2" size="2" value = "0" /></td>
+                  </tr>
+                  <tr>
+                      <td>8.Experiencia Profesional</td>
+                      <td></td>
+                      <td></td>                        
+                      <td></td>
+                  </tr>
+                  <tr>
+                      <td>8.1.De 1 a 3  años</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion21" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>7</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="experiencia3" type="text" id="profesional1" size="2" value = "0" /></td>
+                  </tr>
+                  <tr>
+                      <td>8.2.Más de 3 años</td>
+                      <td><textarea [disabled] ="deshabilitado" [(ngModel)]="observacion22" name="mensaje" cols="40" rows="5"></textarea></td>
+                      <td>10</td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="experiencia4" type="text" id="profesional2" size="2" value = "0"/></td>
+                  </tr>
+                  <tr style="background-color: #ffff99;">
+                      <td>PUNTAJE TOTAL</td>
+                      <td><button [disabled] ="deshabilitado" type="button" class="no-mostrar-en-impresion" (click)="calcularTotal()">Calcular Total</button></td>
+                      <td></td>
+                      <td></td>
+                      <td><input [disabled] ="deshabilitado" [(ngModel)]="totalEvaluacion" type="text"  name="puntajetotal" id ="puntajetotal" size="2" value="0" /></td>                    
+                  </tr>
+              </tbody>
+          </table>
+          <h3 class="no-mostrar-en-impresion"><b>PUNTAJE MÍNIMO ELEGIBLE 70/100</b></h3>
+          <br><br>
+          <h3 class="mostrar-en-impresion"><b>ADMITIDO:{{textoAdmitido}}</b></h3> 
+          <div class="no-mostrar-en-impresion" *ngIf="mostrarRadio">
+            <input  type="radio" (click)="admitir(1)" name="miradio1" value="SI">SI            
+             <input type="radio" (click)="admitir(0)"name="miradio1" value="NO">NO
+          </div>
+          
+          <br><br>
+          OBSERVACIONES:
+          <textarea [disabled] ="deshabilitado" [(ngModel)]="observacionGeneral" name="mensaje" cols="100" rows="5"></textarea><br><br>
+          <div class="row g-3">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-1">
+                <button [disabled] ="deshabilitadoPrint" class="no-mostrar-en-impresion" mat-raised-button type="button" onclick="window.print();"> <mat-icon>print</mat-icon> Imprimir</button> 
+            </div>
+            <div class="col-md-2">
+                <button class="no-mostrar-en-impresion btn-primary-udc2" mat-raised-button [disabled] ="deshabilitado" type="button" (click)="save()">Guardar Registro</button>
+            </div>
+            <div class="col-md-5">
+            </div>
+          </div>
+          
+          
+          
+            
+         <br><br><br>
+         <br><br><br><br>
+         <p class="mostrar-en-impresion mostrar-solo-en-impresion">
+             ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________<br><br><br><br><br><br>
+             
+             
+             
+             ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________<br><br><br><br><br><br>
+             
+             
+             
+             ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________<br><br><br><br><br><br>
+                   
+         </p>

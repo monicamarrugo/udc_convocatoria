@@ -5,6 +5,7 @@ import { ArchivosParticipanteComponent } from './component/archivos-participante
 import {PantallaActaComponent } from './component/pantalla-acta/pantalla-acta.component';
 import {RequisitosMinimosComponent} from './component/requisitos-minimos/requisitos-minimos.component';
 import {AuthorizatedGuard} from '../core/guard/authorizated.guard';
+import { HojaVidaComponent } from './component/hoja-vida/hoja-vida.component';
 
 const routes: Routes = [
   {
@@ -32,13 +33,19 @@ const routes: Routes = [
             }
       },
       {
-            path: 'reporte/:codigoInscripicion',
+            path: 'reporte',
             component: PantallaActaComponent,
-            canActivate: [AuthorizatedGuard],
             data: {
                   title: 'Reporte Requisitos',
                 }
-          }
+          },
+        {
+                path: 'hojavida',
+                component: HojaVidaComponent,
+                data: {
+                      title: 'Requisitos Minimos',
+                    }
+              },
 ];
 
 @NgModule({

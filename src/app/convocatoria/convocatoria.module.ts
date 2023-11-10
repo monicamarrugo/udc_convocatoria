@@ -10,6 +10,8 @@ import { RequisitosMinimosComponent } from './component/requisitos-minimos/requi
 import { CheckRequisitosComponent } from './component/check-requisitos/check-requisitos.component';
 import {AuthorizatedGuard} from '../core/guard/authorizated.guard';
 import { PantallaActaComponent } from './component/pantalla-acta/pantalla-acta.component';
+import { HojaVidaComponent } from './component/hoja-vida/hoja-vida.component';
+import { ConsolidadoHvComponent } from './component/consolidado-hv/consolidado-hv.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { PantallaActaComponent } from './component/pantalla-acta/pantalla-acta.c
     RequisitosMinimosComponent,
     CheckRequisitosComponent,
     PantallaActaComponent,
+    HojaVidaComponent,
+    ConsolidadoHvComponent,
   ],
   imports: [
     CommonModule,

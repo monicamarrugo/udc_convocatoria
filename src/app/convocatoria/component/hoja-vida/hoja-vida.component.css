@@ -1,9 +1,16 @@
-.btn-primary-udc2{
-    background-color: #ff6100;
-    color: #fff;
-  }
+.tablahv{
+    border: 1;
+}
 
-  @media print {
+.btn-primary-udc2{
+  background-color: #ff6100;
+  color: #fff;
+}
+.mostrar-solo-en-impresion{
+  display: none;
+}
+
+@media print {
     .mostrar-en-impresion {
       display: block; /* O el valor de display apropiado */
     }

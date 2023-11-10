@@ -8,7 +8,7 @@ import {Comision} from '../convocatoria/model/comision';
 import {Usuario} from '../convocatoria/model/dtos/usuario';
 import {CustomModalComponent,TipoMensajeEnum} from 'src/app/widgets/custom-modal/custom-modal.component';
 import {StorageService} from '../convocatoria/services/storage.service';
-
+import { DocumentosService} from 'src/app/convocatoria/services/documentos.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,6 +25,7 @@ export class LoginComponent {
     private router: Router,
     private passwordEncryptionService : PasswordEncryptionService,
     private storageService: StorageService,
+    private documentoService: DocumentosService
     ){
       
     this.loginForm = this.formBuilder.group({
@@ -48,7 +49,12 @@ export class LoginComponent {
   
                         if(result.id){
                           this.storageService.setCurrentSession(result);
-                                  this.router.navigate(['/convocatoria/requisitos']);
+                          if(result.tipoUsuario == 'COMITE_CENTRAL'){
+                            this.router.navigate(['/convocatoria/reporte']);
+                          }else{
+                            this.router.navigate(['/convocatoria/requisitos']);
+                          }
+                          
                         }else{
                           var dConfirmError = this._dialog.open(CustomModalComponent,
                                 { width: '450px',
@@ -60,5 +66,17 @@ export class LoginComponent {
                         }
                   });
     }
+  }
+
+  downloadDocumento(fileName:string){
+    this.documentoService.downloadFile(fileName).subscribe(response => {
+      const blob = new Blob([response], { type: 'application/pdf' }); // Cambia el tipo MIME según tu archivo
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    });
   }
 }

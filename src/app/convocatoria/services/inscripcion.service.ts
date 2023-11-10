@@ -5,6 +5,7 @@ import { AppRequest } from 'src/app/core/base/request/app-request';
 import { environment } from 'src/environments/environment';
 import{Inscripcion} from '../model/dtos/inscripcion';
 import{InscripcionMinimos} from '../model/dtos/inscripcion-minimos';
+import{Evaluado} from '../model/dtos/evaluado';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +51,13 @@ saveDocMinimo(datosDocMinimo:InscripcionMinimos[]): Observable<any> {    
       return this.postRequest(url, datosDocMinimo);
 }
 
+saveEvaluacionHv(datosHV:any): Observable<any> {     
+      const url =  `/api/Inscripcion/guardarHojaVida`;
+      return this.postRequest(url, datosHV);
+}
+getEvaluadosMinimos(codigoPerfil:string): Observable<Evaluado[]> {
+  const url =  `/api/Inscripcion/consultarEvaluacionMinimos?codigoPerfil=${codigoPerfil}`;
+  return this.getRequest(url);
+}
 
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Comision } from '../model/comision';
 
 @Injectable({
@@ -19,9 +19,10 @@ export class StorageService {
     return (this.loadSessionData() != undefined) ? true : false;
   };
 
-  setCurrentSession(session: Comision): void {
+  setCurrentSession(session: Comision): boolean {
     this.currentSession = session;
     localStorage.setItem('currentUser', JSON.stringify(session));
+    return true;
   }
 
   loadSessionData(): Comision | undefined {

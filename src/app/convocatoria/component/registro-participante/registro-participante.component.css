@@ -6,3 +6,9 @@
     background-color: #ff6100;
     color: #fff;
   }
+
+  @media print {
+    .mostrar-en-impresion {
+      display: block; /* O el valor de display apropiado */
+    }
+  }

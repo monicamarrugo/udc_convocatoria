@@ -1,0 +1,80 @@
+<div class="row g-3 mb-2">       
+    <div class="col-md-10">
+        
+    </div>
+    <div class="col-md-1">
+        <button class="no-mostrar-en-impresion" mat-raised-button type="button" onclick="window.print();"> <mat-icon>print</mat-icon>Imprimir</button> 
+    </div>
+  </div>
+<table class="table table-bordered text-center">
+   
+    <tbody>
+      <tr> 
+        <td  rowspan="3"><img src="assets/img/logo_udc.png"></td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>VICERRECTORÍA DE DOCENCIA</b></td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>LISTA DE ADMITIDOS Y NO ADMITIDOS EN LOS PERFILES PARA DOCENTES PLANTA ESTUDIO DE HOJA DE VIDA</b></td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+<div class="container mt-4 mb-4">
+   
+    <div class="row mb-2 overflow-hidden">
+        <div class="table-responsive overflow-hidden">
+            <table [dataSource]="dataSource"  mat-table class="table table-sm table-bordered" matSort>                   
+              <ng-container matColumnDef="codigoperfil">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> CÓDIGO PERFIL </th>
+                <td mat-cell *matCellDef="let element"> {{element.codigoperfil}} </td>
+              </ng-container>
+              <ng-container matColumnDef="codigoinscripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> CÓDIGO INSCRIPCIÓN </th>
+                <td mat-cell *matCellDef="let element"> {{element.codigoinscripcion}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalFormacion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> FORMACIÓN POSTGRADUAL EN EL ÁREA DE LA CONVOCATORIA</th>
+                <td mat-cell *matCellDef="let element"> {{element.totalFormacion}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalFormacionIn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> FORMACIÓN EN DOCENCIA UNIVERSITARIA E INGLÉS </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalFormacionIn}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalProduccion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> PRODUCCIÓN ACADÉMICA </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalProduccion}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalExperiencia">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> EXPERIENCIA CALIFICADA </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalExperiencia}} </td>
+              </ng-container>
+              <ng-container matColumnDef="totalEvaluacion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> PUNTAJE TOTAL </th>
+                <td mat-cell *matCellDef="let element"> {{element.totalEvaluacion}} </td>
+              </ng-container>
+              <ng-container matColumnDef="admitido">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> ADMITIDO </th>
+                <td mat-cell *matCellDef="let element"> {{element.admitido?'SI':'NO'}} </td>
+              </ng-container>
+             
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+    </div>
+    <div class="row">
+       
+         <p class="mostrar-solo-en-impresion mostrar-en-impresion">
+             ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________<br><br><br><br><br><br>
+             
+             
+             
+             ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________<br><br><br><br><br><br>
+                     
+         </p>
+    </div>
+</div>

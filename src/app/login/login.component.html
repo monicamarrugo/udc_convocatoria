@@ -1,22 +1,42 @@
 <body class="text-center">
-    
-    <form [formGroup] = "loginForm" (ngSubmit)="ingresar()" class="form-signin" novalidate>
-      <h1 class="h3 mb-3 font-weight-normal">Convocatorias</h1>
-       <mat-form-field class="full-width">
-        <mat-label class="sr-only">Nombre Usuario:</mat-label>
-        <input matInput id="nombreUsuario" formControlName="nombreUsuario" value="" required #nombreUsuario>
-        <mat-error *ngIf="loginForm.controls['nombreUsuario'].hasError('required')">
-          Por favor ingrese Nombre Usuario.
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <mat-label class="sr-only">Contraseña:</mat-label>
-        <input type="password" matInput id="contrasena"  formControlName="contrasena" value="" required #contrasena>
-        <mat-error *ngIf="loginForm.controls['contrasena'].hasError('required')">
-          Por favor ingrese Contraseña.
-        </mat-error>
-      </mat-form-field>
-      
-      <button class="btn btn-lg btn-primary-udc2 btn-block" type="submit">Ingresar</button>
-    </form>
+  <div class="container mt-4 mb-4">
+    <div class="row mb-2 px-0">
+      <div class="col-md-12">
+    <div class="jumbotron p-3 text-white rounded bg-gray">
+      <div class="row featurette mb-5">
+        <div class="text-center">
+          <h5 class="display-12  text-udc mb-4">
+            Resultados prueba psicológica. Concurso público de méritos. <br/>Resolución 02046 del 16 de agosto del 2023.</h5>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+          <button type="button" (click)="downloadDocumento('RESULTADOS_PRUEBA_PSICOLOGICA.pdf')"
+          class="btn btn-primary-udc2 btn-lg px-4 gap-3">Descargar Resultados</button>
+        </div>
+        </div>
+      </div>
+      </div>
+      </div>
+    </div>
+    <div class="row mb-2 px-0">
+      <form [formGroup] = "loginForm" (ngSubmit)="ingresar()" class="form-signin" novalidate>
+        <h1 class="h3 mb-3 font-weight-normal">Convocatorias</h1>
+         <mat-form-field class="full-width">
+          <mat-label class="sr-only">Nombre Usuario:</mat-label>
+          <input matInput id="nombreUsuario" formControlName="nombreUsuario" value="" required #nombreUsuario>
+          <mat-error *ngIf="loginForm.controls['nombreUsuario'].hasError('required')">
+            Por favor ingrese Nombre Usuario.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label class="sr-only">Contraseña:</mat-label>
+          <input type="password" matInput id="contrasena"  formControlName="contrasena" value="" required #contrasena>
+          <mat-error *ngIf="loginForm.controls['contrasena'].hasError('required')">
+            Por favor ingrese Contraseña.
+          </mat-error>
+        </mat-form-field>
+        
+        <button class="btn btn-lg btn-primary-udc2 btn-block" type="submit">Ingresar</button>
+      </form>
+    </div>
+
+</div> 
 </body>
