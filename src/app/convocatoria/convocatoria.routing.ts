@@ -6,6 +6,7 @@ import {PantallaActaComponent } from './component/pantalla-acta/pantalla-acta.co
 import {RequisitosMinimosComponent} from './component/requisitos-minimos/requisitos-minimos.component';
 import {AuthorizatedGuard} from '../core/guard/authorizated.guard';
 import { HojaVidaComponent } from './component/hoja-vida/hoja-vida.component';
+import { EvaluacionCompetenciasComponent } from './component/evaluacion-competencias/evaluacion-competencias.component';
 
 const routes: Routes = [
   {
@@ -31,21 +32,29 @@ const routes: Routes = [
         data: {
               title: 'Requisitos Minimos',
             }
-      },
-      {
-            path: 'reporte',
-            component: PantallaActaComponent,
-            data: {
-                  title: 'Reporte Requisitos',
-                }
-          },
-        {
-                path: 'hojavida',
-                component: HojaVidaComponent,
-                data: {
-                      title: 'Requisitos Minimos',
-                    }
-              },
+    },
+    {
+        path: 'reporte',
+        component: PantallaActaComponent,
+        data: {
+              title: 'Reporte Requisitos',
+            }
+    },
+    {
+        path: 'hojavida',
+        component: HojaVidaComponent,
+        data: {
+              title: 'Requisitos Minimos',
+            }
+    },
+    {
+        path: 'competencias',
+        component: EvaluacionCompetenciasComponent,
+        canActivate: [AuthorizatedGuard],
+        data: {
+              title: 'Evaluación Competencias',
+            }
+    }
 ];
 
 @NgModule({

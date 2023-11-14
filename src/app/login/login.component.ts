@@ -52,7 +52,7 @@ export class LoginComponent {
                           if(result.tipoUsuario == 'COMITE_CENTRAL'){
                             this.router.navigate(['/convocatoria/reporte']);
                           }else{
-                            this.router.navigate(['/convocatoria/requisitos']);
+                            this.router.navigate(['/convocatoria/competencias']);
                           }
                           
                         }else{

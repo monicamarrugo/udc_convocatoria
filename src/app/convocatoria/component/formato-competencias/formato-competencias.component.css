@@ -1,0 +1,24 @@
+.btn-primary-udc{
+    background-color: #e79d19;
+    color: #fff;
+  }
+  .btn-primary-udc2{
+    background-color: #ff6100;
+    color: #fff;
+  }
+
+  .mi-mat-form-field {
+    border: 2px solid #2196F3; /* Cambia el color y grosor del borde según tus preferencias */
+    border-radius: 4px; /* Ajusta el radio de borde si lo deseas */
+    overflow: hidden; /* Evita que el borde afecte al margen interior */
+  }
+
+  @media print {
+    .mostrar-en-impresion {
+      display: block; /* O el valor de display apropiado */
+    }
+
+    .no-mostrar-en-impresion {
+        display: none; /* O el valor de display apropiado */
+      }
+  }

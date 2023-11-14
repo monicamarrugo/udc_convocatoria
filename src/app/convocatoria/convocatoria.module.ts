@@ -12,6 +12,9 @@ import {AuthorizatedGuard} from '../core/guard/authorizated.guard';
 import { PantallaActaComponent } from './component/pantalla-acta/pantalla-acta.component';
 import { HojaVidaComponent } from './component/hoja-vida/hoja-vida.component';
 import { ConsolidadoHvComponent } from './component/consolidado-hv/consolidado-hv.component';
+import { EvaluacionCompetenciasComponent } from './component/evaluacion-competencias/evaluacion-competencias.component';
+import { FormatoCompetenciasComponent } from './component/formato-competencias/formato-competencias.component';
+import { CompetenciasConsolidadasComponent } from './component/competencias-consolidadas/competencias-consolidadas.component';
 
 
 @NgModule({
@@ -23,6 +26,9 @@ import { ConsolidadoHvComponent } from './component/consolidado-hv/consolidado-h
     PantallaActaComponent,
     HojaVidaComponent,
     ConsolidadoHvComponent,
+    EvaluacionCompetenciasComponent,
+    FormatoCompetenciasComponent,
+    CompetenciasConsolidadasComponent,
   ],
   imports: [
     CommonModule,

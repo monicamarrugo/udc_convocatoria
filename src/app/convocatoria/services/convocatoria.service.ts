@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Observable } from "rxjs";
 import { Convocatoria } from '../model/dtos/convocatoria';
 import { Comision } from '../model/comision';
+import { EvaluacionDto } from '../model/dtos/evaluacion-competencia';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,15 @@ export class ConvocatoriaService extends AppRequest {
     const url =  `/api/Convocatoria/buscarEvaluacionHojaVida?codigoInscripcion=${codigoInscripcion}`;
     return this.getRequest(url);
   }
+  geListarCompetencias(codigoInscripcion:string): Observable<EvaluacionDto> {
+    const url =  `/api/Convocatoria/listarCompetencias?codigoInscripcion=${codigoInscripcion}`;
+    return this.getRequest(url);
+  }
+  geListarPromediados(codigoInscripcion:string): Observable<EvaluacionDto> {
+    const url =  `/api/Convocatoria/listarPonderado?codigoInscripcion=${codigoInscripcion}`;
+    return this.getRequest(url);
+  }
+  
 
   getConsolidadoVerificacionHojaVida(listaPerfiles:string[]): Observable<any> {
     const url =  `/api/Convocatoria/consolidadoHojaVida`;
@@ -55,5 +65,14 @@ export class ConvocatoriaService extends AppRequest {
 
   }
 
+  saveEvaluacionCompetencia(datosEvaluacion:any): Observable<any> {     
+        const url =  `/api/Convocatoria/guardarEvaluacionCompetencias`;
+        return this.postRequest(url, datosEvaluacion);
+  }
+
+  saveConsolidadoCompetencia(datosEvaluacion:any): Observable<any> {     
+        const url =  `/api/Convocatoria/guardarConsolidadoCompetencias`;
+        return this.postRequest(url, datosEvaluacion);
+  }
 
 }

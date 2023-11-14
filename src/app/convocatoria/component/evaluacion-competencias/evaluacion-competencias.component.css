@@ -1,0 +1,9 @@
+@media print {
+    .mostrar-en-impresion {
+      display: block; /* O el valor de display apropiado */
+    }
+
+    .no-mostrar-en-impresion {
+        display: none; /* O el valor de display apropiado */
+      }
+  }

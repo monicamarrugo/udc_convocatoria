@@ -35,6 +35,10 @@ getInscripcionByPerfil(codigoPerfil:string): Observable<Inscripcion[]> {
   const url =  `/api/Inscripcion/inscripcionPerfil?codigoPerfil=${codigoPerfil}`;
   return this.getRequest(url);
 }
+getAdmitidosHV(codigoPerfil:string): Observable<Inscripcion[]> {
+  const url =  `/api/Inscripcion/obtenerAdmitidosHV?codigoPerfil=${codigoPerfil}`;
+  return this.getRequest(url);
+}
 
 getInscripcionById(codigoInscripcion:string): Observable<Inscripcion> {
   const url =  `/api/Inscripcion/consultar?codigoInscripcion=${codigoInscripcion}`;
