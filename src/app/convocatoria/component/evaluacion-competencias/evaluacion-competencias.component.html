@@ -11,7 +11,7 @@
       </div>
       <div class="col-md-7"></div>
       <div class="col-md-2">
-        <!--<button class="no-mostrar-en-impresion w-100 btn btn-primary-udc2 mb-4"  type="button" (click)="verConsolidado()">Ver Consolidado</button>-->
+        <button class="no-mostrar-en-impresion w-100 btn btn-primary-udc2 mb-4"  type="button" (click)="verConsolidado()">Ver Consolidado</button>
       </div>
     </div>
       <div class="row">
@@ -71,6 +71,12 @@
                                   <mat-icon>assignment_returned</mat-icon>
                                 </button>
                               </div>
+                              <div class="col">
+                                <button mat-mini-fab class="primary" aria-label="preview"
+                                  matTooltip="Ver Evaluaciones" [matTooltipPosition]="'below'" (click)='verEvaluaciones(element)'>
+                                  <mat-icon>assignment_turned_in</mat-icon>
+                                </button>
+                              </div>
                             </div>
                           </td>
                         </ng-container>
@@ -81,7 +87,34 @@
                   </div>
                   
               </div>
+              
             </div>
+            <div *ngIf="mostrarResultados" class="row no-mostrar-en-impresion">
+              <div class="table-responsive overflow-hidden">
+                  <table [dataSource]="dataSourceIndividual"  mat-table class="table table-sm table-bordered" matSort>                   
+                    <ng-container matColumnDef="identificacionEvaluador">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> IDENTIFICACION EVALUADOR </th>
+                      <td mat-cell *matCellDef="let element"> {{element.cabeceraEvaluacion.identificacionEvaluador}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="nombreEvaluador">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>NOMBRE EVALUADOR</th>
+                      <td mat-cell *matCellDef="let element"> {{element.cabeceraEvaluacion.nombreEvaluador}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="totalEvaluacion">
+                      <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> TOTAL EVALUACIÓN</th>
+                      <td mat-cell *matCellDef="let element"> {{element.cabeceraEvaluacion.totalEvaluacion}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="observacion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> OBSERVACIÓN </th>
+                      <td mat-cell *matCellDef="let element"> {{element.cabeceraEvaluacion.observacion}} </td>
+                    </ng-container>
+                   
+          
+                    <tr mat-header-row *matHeaderRowDef="displayedColumnsi"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumnsi;"></tr>
+                  </table>
+                </div>
+          </div>
             <div *ngIf="parameters !=undefined" class="row">
                 <div class="col-md-10"></div>
                 <div class="col-md-2">
@@ -98,8 +131,10 @@
                 <div class="plogou no-mostrar-en-impresion"> <button mat-raised-button matTooltip="Seguir Evaluando" (click)='volver()'>Volver al listado</button></div>  
               </div> 
             <app-competencias-consolidadas [parameters]="parametersPro"></app-competencias-consolidadas>
-            
 
+          </div>
+          <div *ngIf="listaPerfiles !=undefined" class="row">
+            <app-competencias-resultados [listaPerfiles]="listaPerfiles"></app-competencias-resultados>
           </div>
         </div>
       </div>

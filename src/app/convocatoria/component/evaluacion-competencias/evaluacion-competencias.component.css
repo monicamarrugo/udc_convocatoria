@@ -1,4 +1,17 @@
+.btn-primary-udc2{
+  background-color: #ff6100;
+  color: #fff;
+}
+
 @media print {
+  .mostrar-en-impresion {
+    display: block; /* O el valor de display apropiado */
+  }
+
+  .no-mostrar-en-impresion {
+      display: none; /* O el valor de display apropiado */
+    }
+}@media print {
     .mostrar-en-impresion {
       display: block; /* O el valor de display apropiado */
     }

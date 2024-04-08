@@ -1,0 +1,64 @@
+<div class="row g-3 mb-2">       
+    <div class="col-md-10">
+        
+    </div>
+    <div class="col-md-1">
+        <button class="no-mostrar-en-impresion" mat-raised-button type="button" onclick="window.print();"> <mat-icon>print</mat-icon>Imprimir</button> 
+    </div>
+  </div>
+<table class="table table-bordered text-center">
+   
+    <tbody>
+      <tr> 
+        <td  rowspan="3"><img src="assets/img/logo_udc.png"></td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>VICERRECTORÍA DE DOCENCIA</b></td>
+      </tr>
+      <tr>
+        <td colspan="3"><b>LISTA DE ADMITIDOS Y NO ADMITIDOS EN LOS PERFILES PARA DOCENTES PLANTA EVALUACION COMPETENCIAS</b></td>
+      </tr>
+    </tbody>
+  </table>
+  
+
+<div class="container mt-4 mb-4">
+   
+    <div class="row mb-2 overflow-hidden">
+        <div class="table-responsive overflow-hidden">
+            <table [dataSource]="dataSource"  mat-table class="table table-sm table-bordered" matSort>                   
+              <ng-container matColumnDef="codigoPerfil">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> CÓDIGO PERFIL </th>
+                <td mat-cell *matCellDef="let element"> {{element.codigoPerfil}} </td>
+              </ng-container>
+              <ng-container matColumnDef="codigo_inscripcion">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> CÓDIGO INSCRIPCIÓN </th>
+                <td mat-cell *matCellDef="let element"> {{element.codigo_inscripcion}} </td>
+              </ng-container>
+              <ng-container matColumnDef="total_ponderado">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> TOTAL PROMEDIADO</th>
+                <td mat-cell *matCellDef="let element"> {{element.total_ponderado}} </td>
+              </ng-container>
+              <ng-container matColumnDef="elegible">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> ADMITIDO </th>
+                <td mat-cell *matCellDef="let element"> {{element.elegible?'SI':'NO'}} </td>
+              </ng-container>
+             
+    
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+    </div>
+    <div class="row">
+       
+         <p class="mostrar-solo-en-impresion mostrar-en-impresion">
+             ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________<br><br><br><br><br><br>
+             
+             
+             
+             ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;___________________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ___________________<br><br><br><br><br><br>
+                     
+         </p>
+    </div>
+</div>

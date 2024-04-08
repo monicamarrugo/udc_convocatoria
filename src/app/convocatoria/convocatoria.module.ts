@@ -15,6 +15,7 @@ import { ConsolidadoHvComponent } from './component/consolidado-hv/consolidado-h
 import { EvaluacionCompetenciasComponent } from './component/evaluacion-competencias/evaluacion-competencias.component';
 import { FormatoCompetenciasComponent } from './component/formato-competencias/formato-competencias.component';
 import { CompetenciasConsolidadasComponent } from './component/competencias-consolidadas/competencias-consolidadas.component';
+import { CompetenciasResultadosComponent } from './component/competencias-resultados/competencias-resultados.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { CompetenciasConsolidadasComponent } from './component/competencias-cons
     EvaluacionCompetenciasComponent,
     FormatoCompetenciasComponent,
     CompetenciasConsolidadasComponent,
+    CompetenciasResultadosComponent,
   ],
   imports: [
     CommonModule,

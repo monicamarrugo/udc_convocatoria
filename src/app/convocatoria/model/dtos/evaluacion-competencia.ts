@@ -4,6 +4,7 @@ export class EvaluacionDto{
     detalleEvaluacion: DetalleEvaluacion[];
     competencias: Competencias[];
     
+    
     constructor(_parameters: any) {
            this.cabeceraEvaluacion = (_parameters?.cabeceraEvaluacion != null ? _parameters.cabeceraEvaluacion : undefined);
            this.detalleEvaluacion = (_parameters?.detalleEvaluacion != null ? _parameters.detalleEvaluacion : undefined);
@@ -20,6 +21,8 @@ export class EvaluacionCompetencia{
     nombreEvaluador : string;
     totalEvaluacion : number;
     observacion : string;
+    codigoPerfil: string;
+    fechaEvaluacion: string;
     
     constructor(_parameters: any) {
            this.idEvaluacion = (_parameters?.idEvaluacion != null ? _parameters.idEvaluacion : undefined);
@@ -28,6 +31,8 @@ export class EvaluacionCompetencia{
            this.nombreEvaluador = (_parameters?.nombreEvaluador != null ? _parameters.nombreEvaluador : undefined);
            this.totalEvaluacion = (_parameters?.totalEvaluacion != null ? _parameters.totalEvaluacion : undefined);
            this.observacion = (_parameters?.observacion != null ? _parameters.observacion : undefined);
+           this.codigoPerfil = (_parameters?.codigoPerfil != null ? _parameters.codigoPerfil : undefined);
+           this.fechaEvaluacion = (_parameters?.fechaEvaluacion != null ? _parameters.fechaEvaluacion : undefined);
     }
 
 }

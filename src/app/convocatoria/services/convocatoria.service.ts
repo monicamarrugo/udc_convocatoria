@@ -65,6 +65,18 @@ export class ConvocatoriaService extends AppRequest {
 
   }
 
+  getConsolidadoCompetencias(listaPerfiles:string[]): Observable<any> {
+    const url =  `/api/Convocatoria/listarConsolidadoCompetencias`;
+    return this.postRequest(url, listaPerfiles);
+
+  }
+  getEvaluacionesCompetencia(codigoInscripcion:string): Observable<any> {
+    const url =  `/api/Convocatoria/evaluacionCompetenciaCodigo?codigoInscripcion=${codigoInscripcion}`;
+    return this.getRequest(url);
+
+  }
+  
+
   saveEvaluacionCompetencia(datosEvaluacion:any): Observable<any> {     
         const url =  `/api/Convocatoria/guardarEvaluacionCompetencias`;
         return this.postRequest(url, datosEvaluacion);

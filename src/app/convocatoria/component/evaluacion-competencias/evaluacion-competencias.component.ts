@@ -6,6 +6,7 @@ import { FacultadPerfil } from '../../model/facultad-perfil';
 import { Inscripcion } from '../../model/dtos/inscripcion';
 import { MatTableDataSource } from '@angular/material/table';
 import { InscripcionService } from '../../services/inscripcion.service';
+import { ConvocatoriaService } from '../../services/convocatoria.service';
 
 @Component({
   selector: 'app-evaluacion-competencias',
@@ -22,6 +23,7 @@ export class EvaluacionCompetenciasComponent {
   public mostrarNoResultados: boolean = false;
   public totalInscripciones: number  = 100;
   public dataSource: MatTableDataSource<Inscripcion>;
+  public dataSourceIndividual: MatTableDataSource<any>;
   parameters!: any | undefined;
   parametersPro!: any | undefined;
   public displayedColumns: string[] = [
@@ -30,15 +32,24 @@ export class EvaluacionCompetenciasComponent {
     'codigoInscripcion',
     'acciones'
    ];
+
+   public displayedColumnsi: string[] = [
+    'identificacionEvaluador',
+    'nombreEvaluador',
+    'totalEvaluacion',
+    'observacion'
+   ];
    listaPerfiles!: string[] |undefined;
   constructor(private formBuilder: FormBuilder,
     private storageService: StorageService,
     private listaService: ListasService,
-    private inscripcionService : InscripcionService,){
+    private inscripcionService : InscripcionService,
+    private convocatoriaService: ConvocatoriaService){
 
       this.mostrarResultados = false;
       this.mostrarNoResultados = false;
       this.dataSource = new MatTableDataSource<Inscripcion>([]);
+      this.dataSourceIndividual = new MatTableDataSource<any>([]);
     this.evaluacionForm = this.formBuilder.group({
       idComision: ['', Validators.required],
       codigoPerfil: ['', Validators.required]
@@ -50,7 +61,8 @@ export class EvaluacionCompetenciasComponent {
   
     if(this.selectedPerfil){
       this.parameters = undefined;
-     // this.listaPerfiles = undefined;
+      this.parametersPro = undefined;
+      this.listaPerfiles = undefined;
   
       this.inscripcionService.getAdmitidosHV(this.selectedPerfil)
       .subscribe({
@@ -71,6 +83,14 @@ export class EvaluacionCompetenciasComponent {
   
   }
 
+  verConsolidado(){
+    this.parameters = undefined;
+    this.parametersPro = undefined;
+    this.mostrarResultados =false;
+    this.selectedPerfil = undefined;
+    this.listaPerfiles = this.lPerfiles.map( p => p.perfil);
+  }
+
   private getPerfiles(){
     let comision = this.storageService.loadSessionData();
     this.evaluacionForm.controls['codigoPerfil'].setValue(
@@ -87,10 +107,23 @@ export class EvaluacionCompetenciasComponent {
                 });
   }
 
+  verEvaluaciones(row: any){
+    this.convocatoriaService
+    .getEvaluacionesCompetencia(row.codigoInscripcion)
+    .subscribe({
+            next: (data) => { 
+              this.dataSourceIndividual = data;
+                },
+            error: (error) => {
+            },
+              });
+  }
+
   verVerificador(row: any) {
     const participante: any = {
       codigoInscripcion: row.codigoInscripcion,
-      nombre: row.nombres +" "+ row.apellidos
+      nombre: row.nombres +" "+ row.apellidos,
+      codigoPerfil : this.selectedPerfil
     };
     this.mostrarResultados =false;
     this.listaPerfiles = undefined;
@@ -100,7 +133,8 @@ export class EvaluacionCompetenciasComponent {
   verVerificadorPromedio(row: any) {
     const participante: any = {
       codigoInscripcion: row.codigoInscripcion,
-      nombre: row.nombres +" "+ row.apellidos
+      nombre: row.nombres +" "+ row.apellidos,
+      codigoPerfil : this.selectedPerfil
     };
     this.mostrarResultados =false;
     this.listaPerfiles = undefined;

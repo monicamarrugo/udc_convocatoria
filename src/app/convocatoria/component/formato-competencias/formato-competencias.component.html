@@ -86,9 +86,8 @@
                 <tr>
                     <td ><b>NOMBRE Y FIRMA DEL EVALUADOR:</b></td>
                    
-                    <td >	<button type="button" [disabled] ="deshabilitado" class="no-mostrar-en-impresion" (click)="calcularTotal()">Calcular Total</button></td>
               
-                    <td ><input matInput [(ngModel)]="calificacionTotal" disabled="disable"></td>
+                    <td >TOTAL: <input matInput [(ngModel)]="calificacionTotal" disabled="disable"></td>
                 </tr>
             </tbody>
         </table>
@@ -99,10 +98,19 @@
       </div>
       <div class="row mb-5">
         
-        <h5 class="no-mostrar-en-impresion"><b>Observaciones:</b></h5>
+        <h5 class="mostrar-en-impresion"><b>Observaciones:</b></h5>
         <textarea [disabled] ="deshabilitado" [(ngModel)]="observacion" name="mensaje" cols="40" rows="5"></textarea>
       </div>
-      <div class="row mb-5">
-        <button class="w-100 btn btn-primary-udc2 btn-lg mb-4" [disabled] ="deshabilitado" (click)="guardarEvaluacion()" type="submit">Guardar</button>
+      <div class="row g-3">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-1">
+            <button class="no-mostrar-en-impresion" [disabled] ="deshabilitadoPrint"  mat-raised-button type="button" onclick="window.print();"> <mat-icon>print</mat-icon> Imprimir</button> 
+        </div>
+        <div class="col-md-2">
+            <button class="no-mostrar-en-impresion btn-primary-udc2" mat-raised-button [disabled] ="deshabilitado" type="button" (click)="guardarEvaluacion()">Guardar Registro</button>
+        </div>
+        <div class="col-md-5">
+        </div>
       </div>
 </div>

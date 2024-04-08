@@ -17,11 +17,12 @@ export class FormatoCompetenciasComponent {
  nombre:string="Sistemas";
  identificacion:string="Sistemas";
 codigoinscripcion:string="";
-calificacionTotal:number|null = null;
+calificacionTotal:number = 0;
 identificacionEvaluador:string|undefined = undefined;
 nombreEvaluador:string|undefined = undefined;
 deshabilitado:boolean= false;
 observacion: string= "";
+codigoPerfil: string = "";
 escala = [
   { valor: 40, texto: '40' },
   { valor: 70, texto: '70' },
@@ -37,6 +38,7 @@ public displayedColumns: string[] = [
   'peso',
   'calificacionPonderada'  
  ];
+ deshabilitadoPrint: boolean = true;
 public dataSource: MatTableDataSource<Competencias>;
 
  @Input()
@@ -49,6 +51,7 @@ set parameters(parameters: any) {
   if(parameters){
     this.nombre = parameters.nombre;
     this.codigoinscripcion = parameters.codigoInscripcion;
+    this.codigoPerfil = parameters.codigoPerfil;
     this.cargarEvaluacion();
   }
 }
@@ -99,25 +102,13 @@ calcularTotal(){
   let cont :number = 0;
    let sum: number = 0;
   this.dataSource.data.forEach(c => {
-    if(c.calificacionPonderada === 0){
-      cont+=1;
-    }else{
+  
       sum += c.calificacionPonderada;
-    }
+    
     
   });
-  
-  if(cont > 0){
-    var dConfirm = this._dialog.open(CustomModalComponent,
-          { width: '450px',
-            data: {
-            mensaje: "Debe calificar todas las competencias!",
-            tipoMensaje: TipoMensajeEnum.warning
-          }
-        });
-  }else{
     this.calificacionTotal = sum;
-  }
+  
   
 }
 
@@ -127,6 +118,7 @@ calcularPonderado(event: any, competencia:Competencias){
       c.calificacionPonderada = (Number(event.value) * competencia.peso) / 100;
     }
   });
+  this.calcularTotal();
 }
 
 guardarEvaluacion(){
@@ -139,6 +131,7 @@ guardarEvaluacion(){
       cabecera.nombreEvaluador = this.nombreEvaluador!;
       cabecera.observacion = this.observacion;
       cabecera.totalEvaluacion = Number(this.calificacionTotal);
+      cabecera.codigoPerfil = this.codigoPerfil;
 
       let detalle: DetalleEvaluacion[] = [];
       let odetalle: DetalleEvaluacion;
@@ -160,9 +153,10 @@ guardarEvaluacion(){
       this.convocatoriaService
           .saveEvaluacionCompetencia(dtoEvaluacion)
           .subscribe((result:RespuestaTransaccion)=>{
-    
+           
             if(result.error=='NO'){
                   this.deshabilitado = true;
+                  this.deshabilitadoPrint = false;
                   var dConfirm = this._dialog.open(CustomModalComponent,
                         { width: '450px',
                           data: {

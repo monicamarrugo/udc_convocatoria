@@ -37,6 +37,7 @@ export class CompetenciasConsolidadasComponent {
   textoAdmitido:string='';
   mostrarRadio:boolean = true;
   deshabilitadoPrint: boolean = true;
+  codigoPerfil: string= "";
  public dataSource: MatTableDataSource<Competencias>;
  
   @Input()
@@ -49,6 +50,7 @@ export class CompetenciasConsolidadasComponent {
    if(parameters){
      this.nombre = parameters.nombre;
      this.codigoinscripcion = parameters.codigoInscripcion;
+     this.codigoPerfil = parameters.codigoPerfil;
      this.cargarEvaluacion();
    }
  }
@@ -103,7 +105,8 @@ export class CompetenciasConsolidadasComponent {
      sum += c.calificacionPromediada;
          
    });
-     this.calificacionTotal = sum;
+     let resultado = sum.toFixed(2);
+     this.calificacionTotal = Number(resultado);
       
  }
  
@@ -121,7 +124,8 @@ export class CompetenciasConsolidadasComponent {
     const dtoEvaluacion = {
       codigo_inscripcion: this.codigoinscripcion,
       total_ponderado: this.calificacionTotal,
-      elegible: this.admitido
+      elegible: this.admitido,
+      codigoPerfil: this.codigoPerfil
     }
  
        console.log(dtoEvaluacion);
@@ -131,7 +135,6 @@ export class CompetenciasConsolidadasComponent {
            .subscribe((result:RespuestaTransaccion)=>{
      
              if(result.error=='NO'){
-                   this.deshabilitado = true;
                    var dConfirm = this._dialog.open(CustomModalComponent,
                          { width: '450px',
                            data: {
