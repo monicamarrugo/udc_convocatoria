@@ -67,11 +67,16 @@
                             </div>
                             <div class="col">
                               <button mat-mini-fab class="primary" aria-label="preview"
-                                matTooltip="Verificar Requisitos" [matTooltipPosition]="'below'" (click)='verVerificador(element)'>
+                                matTooltip="Verificar Requisitos" [matTooltipPosition]="'below'" (click)='verVerificadorRequisitos(element)'>
                                 <mat-icon>check_circle</mat-icon>
                               </button>
                             </div>
-                            
+                            <div class="col">
+                              <button mat-mini-fab class="primary" aria-label="preview"
+                                matTooltip="Verificar Hoja de Vida" [matTooltipPosition]="'below'" (click)='verVerificadorHv(element)'>
+                                <mat-icon>check_circle</mat-icon>
+                              </button>
+                            </div>
                           </div>
                         </td>
                       </ng-container>

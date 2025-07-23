@@ -49,11 +49,11 @@ export class LoginComponent {
   
                         if(result.id){
                           this.storageService.setCurrentSession(result);
-                          if(result.tipoUsuario == 'COMITE_CENTRAL'){
+                          /*if(result.tipoUsuario == 'COMITE_CENTRAL'){
                             this.router.navigate(['/convocatoria/reporte']);
                           }else{
                             this.router.navigate(['/convocatoria/competencias']);
-                          }
+                          }*/
                           
                         }else{
                           var dConfirmError = this._dialog.open(CustomModalComponent,

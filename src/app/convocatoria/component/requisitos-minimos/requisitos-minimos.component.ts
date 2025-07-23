@@ -160,7 +160,7 @@ downloadDocumentos(row: any){
   this.disableDown = false;
 }
 
-verVerificador(row: any) {
+verVerificadorHv(row: any) {
   const participante: any = {
     codigoInscripcion: row.codigoInscripcion,
     identificacion: row.identificacion,
@@ -170,6 +170,18 @@ verVerificador(row: any) {
   this.listaPerfiles = undefined;
   this.parameters = participante;
 }
+
+verVerificadorRequisitos(row: any) {
+  const dialogRef = this._dialog.open(CheckRequisitosComponent, {
+    width: '95%',
+    maxHeight: '95vh',
+    disableClose: false,
+    data: {
+      codigoInscripcion: row.codigoInscripcion,
+    },
+  });
+}
+
 
 verReporte(row: any) {
   const url = this.router.serializeUrl(
