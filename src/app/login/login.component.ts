@@ -54,7 +54,7 @@ export class LoginComponent {
                           }else{
                             this.router.navigate(['/convocatoria/competencias']);
                           }*/
-                          
+                            this.router.navigate(['/convocatoria/requisitos']);
                         }else{
                           var dConfirmError = this._dialog.open(CustomModalComponent,
                                 { width: '450px',

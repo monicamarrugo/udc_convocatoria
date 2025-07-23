@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DocumentosService} from 'src/app/convocatoria/services/documentos.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { DocumentosService} from 'src/app/convocatoria/services/documentos.servi
 })
 export class InicioComponent implements OnInit {
 
-  constructor(private documentoService: DocumentosService){
+  constructor(private documentoService: DocumentosService,  private router: Router,){
   }
 
   ngOnInit(): void {
@@ -25,5 +26,14 @@ export class InicioComponent implements OnInit {
       window.URL.revokeObjectURL(url);
     });
   }
+
+  abirDocumentos(){
+    this.router.navigate(['/documentos']);
+  }
+
+  irApagina(url:string){
+    this.router.navigate([url]);
+  }
+  
 
 }

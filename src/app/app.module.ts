@@ -10,6 +10,7 @@ import { MaterialModule } from '../app/modules/material.module';
 import { CustomModalComponent } from './widgets/custom-modal/custom-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { DescargasComponent } from './descargas/descargas.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LoginComponent } from './login/login.component';
     InicioComponent,
     ConfirmacionComponent,
     CustomModalComponent,
-    LoginComponent
+    LoginComponent,
+    DescargasComponent
   ],
   imports: [
     BrowserModule,

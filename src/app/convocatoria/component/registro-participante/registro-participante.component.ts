@@ -112,7 +112,8 @@ public saveInscripcion():void {
                           var dConfirm = this._dialog.open(CustomModalComponent,
                                 { width: '450px',
                                   data: {
-                                  mensaje: "Se ha generado el siguiente código de inscripción \n ¡¡Por favor guardelo. Es necesario para continuar el proceso!! \n "+ result.respuesta,
+                                  mensaje: "Se ha generado el siguiente código de inscripción, \n por favor guárdelo. "+
+                            "Este código será necesario para acceder a consultar y/o cargar información en las diferentes etapas del concurso. \n "+ result.respuesta,
                                   tipoMensaje: TipoMensajeEnum.success
                                 }
                               });  

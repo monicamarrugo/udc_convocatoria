@@ -4,11 +4,12 @@ import {ConvocatoriaModule } from '../app/convocatoria/convocatoria.module';
 import { MainComponent } from './utility/components/main/main.component';
 import {InicioComponent} from './inicio/inicio.component';
 import {LoginComponent} from './login/login.component';
+import { DescargasComponent } from './descargas/descargas.component';
 
 const routes: Routes = [
   {
     path:'',
-    redirectTo: '/login',
+    redirectTo: '/inicio',
     pathMatch: 'full'
   },
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data:{ title: 'Login Convocatoria'}
+  },
+  {
+    path: 'documentos',
+    component: DescargasComponent,
+    data:{ title: 'Descargas Convocatoria'}
   }
 
 

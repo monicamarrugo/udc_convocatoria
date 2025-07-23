@@ -12,6 +12,7 @@ import { Item } from 'src/app/convocatoria/model/item';
 import { ListasService} from '../../services/listas.service';
 import { Convocatoria } from '../../model/dtos/convocatoria';
 import { ConvocatoriaService } from '../../services/convocatoria.service';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-archivos-participante',
@@ -27,6 +28,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
   public dataSource: MatTableDataSource<ResponseDocumento>;
   public codigoConvocatoria:string='';
   public lTiposDocumento: Item[] = [];
+  public selectedTipoDoc: Item | null = null;
   public lDocumentosSubidos: Item[] = [];
   public displayedColumns: string[] = [
     'contenido',
@@ -173,7 +175,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
     const formData = new FormData();
     formData.append('file', this.selectedFile);
     formData.append('codigoInscripcion', this.documentoForm.controls["codigoInscripcion"].value.toUpperCase());
-    formData.append('tipoDocumento', this.documentoForm.controls["tipoDocumento"].value);
+    formData.append('tipoDocumento', (this.documentoForm.controls["tipoDocumento"].value).codigo);
 
         const dialogRef = this._dialog.open(ConfirmacionComponent, {
                   width: '95%',
@@ -240,5 +242,9 @@ export class ArchivosParticipanteComponent  implements OnInit {
       this.documentoForm.controls[controlName].disable();
     });
     this.disableSave=true;
+  }
+
+  onChangeTipoDocumento(event: MatSelectChange) {
+    this.selectedTipoDoc = event.value;
   }
 }

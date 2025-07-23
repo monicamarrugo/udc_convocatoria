@@ -1,58 +1,97 @@
-<main>
-  <div class="jumbotron p-3 p-md-5 text-white rounded bg-gray">
-    <div class="row mb-2 px-0">
-      <div class="col-md-6">
-      <h3 class="display-7 font-italic fw-bold">Universidad de Cartagena </h3>
-      <h5 class="display-12 fw-bold">Vicerrectoría de Docencia</h5>
-        <p class="text-justify">La Universidad de Cartagena anuncia la apertura de 
-          concurso público de méritos para vincular profesoras y profesores de planta 
-          con dedicación de tiempo completo y medio tiempo en sus diferentes unidades académicas;
-           esto, teniendo en cuenta las normas internas, la reglamentación y el cronograma 
-           establecido.<br>
 
-          En concordancia con el Plan de Desarrollo Estratégico Institucional 2022-2026 
-          “Hacia una Universidad Transformadora y Humanista”, la Universidad de Cartagena 
-          promueve que todo aspirante que desee vincularse a la Institución asuma, como 
-          complemento de sus competencias disciplinares e investigativas, su ejercicio
-           pedagógico desde un enfoque integral, en el que predomine la responsabilidad social, 
-           la sensibilidad humana, el compromiso con el entorno institucional y el ambiental cultural; de igual forma, una visión en la que la convivencia, la paz y la armonía sean principios inspiradores del quehacer formativo.
-        </p>
-      </div>
-        <div class="col-md-5">
-          <h3 class="display-7 font-italic fw-bold">¡Lo que necesitas conocer!</h3>
-          <div class="card flex-md-row mb-4 box-shadow h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              
-                <div class="card-body mb-auto">
-                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('Convocatoria2023.pdf')" type="button">Resolución de Convocatoria</button>
-                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('AcuerdoConcurso.pdf')" type="button">Reglamento del Concurso</button>
-                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('CronogramaConcurso.pdf')" type="button">Cronograma del Concurso</button>
-                <button class="w-100 btn btn-primary-udc btn-sm mb-1" (click)="downloadDocumento('FormatoHV.pdf')" type="button">Formato Hoja de Vida</button>
-                <button class="w-100 btn btn-primary-udc btn-sm" (click)="downloadDocumento('InstructivoAplicativo.pdf')" type="button">Instructivo para la Inscripción</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      
-    </div>
-  </div>
-  <hr class="featurette-divider">
-  <div class="jumbotron p-3 text-white rounded bg-gray">
-  <div class="row featurette">
-    <div class="text-center">
-      <h5 class="display-12 fw-bold text-udc mb-4">
-        Concurso público de méritos para vinculación de profesores y profesoras de planta 
-        de tiempo completo y medio tiempo a la Universidad de Cartagena 2023</h5>
-    
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
-      <button type="button" [routerLink]="'/convocatoria/participante'" 
-      class="btn btn-primary-udc2 btn-lg px-4 gap-3">1. Inscripción</button>
-      <button type="button" [routerLink]="'/convocatoria/documentos'" 
-      class="btn btn-outline-secondary btn-lg px-4">2. Subir Documentos</button>
-    </div>
-    </div>
-  </div>
-  </div>
-  <hr class="featurette-divider">
-   
-</main>
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+                <div class="container px-5">
+                    <a class="navbar-brand" [routerLink]="'/inicio'"><span class="fw-bolder text-secondary">Convocatoria Docente</span></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                            <li class="nav-item"><a class="nav-link btn" (click)="irApagina('/inicio')" >Inicio</a></li>
+                            <li class="nav-item"><a class="nav-link btn" (click)="irApagina('/documentos')">Documentos</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Header-->
+            <header class="py-5">
+                <div class="container px-5 pb-1">
+                    <div class="row gx-5 align-items-center">
+                        <div class="col-xxl-5">
+                            <!-- Header text content-->
+                            <div class="text-center my-5">
+                              <h3 class="display-7 fw-bolder"><span class="text-gradient d-inline">Universidad de Cartagena </span></h3>
+                              <p class="lead fw-light mb-4">Vicerrectoría de Docencia</p>
+                              <p class="text-justify">
+                                La Universidad de Cartagena anuncia la apertura de 
+                                concurso público de méritos para vincular profesoras y profesores de planta 
+                                con dedicación de tiempo completo y medio tiempo en sus diferentes unidades académicas;
+                                esto, teniendo en cuenta las normas internas, la reglamentación y el cronograma 
+                                establecido.<br>
+                                En concordancia con el Plan de Desarrollo Estratégico Institucional 2022-2026 
+                                “Hacia una Universidad Transformadora y Humanista”, la Universidad de Cartagena 
+                                promueve que todo aspirante que desee vincularse a la Institución asuma, como 
+                                complemento de sus competencias disciplinares e investigativas, su ejercicio
+                                 pedagógico desde un enfoque integral, en el que predomine la responsabilidad social, 
+                                 la sensibilidad humana, el compromiso con el entorno institucional y el ambiental cultural;
+                                  de igual forma, una visión en la que la convivencia, la paz y la armonía sean principios inspiradores del quehacer formativo.
+                              </p>
+                               <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
+                                    <a class="btn btn-secondary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" (click)="abirDocumentos()">Documentos</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xxl-7">
+                            <!-- Header profile picture-->
+                            <div class="d-flex justify-content-center mt-5 mt-xxl-0">
+                                <div class="profile bg-gradient-primary-to-secondary">
+                                    <!-- TIP: For best results, use a photo with a transparent background like the demo example below-->
+                                    <!-- Watch a tutorial on how to do this on YouTube (link)-->
+                                    <img class="profile-img" src="assets/img/universidad.jpg" alt="..." />
+                                    <div class="dots-1">
+                                        <!-- SVG Dots-->
+                                       
+                                        <!-- END of SVG dots-->
+                                    </div>
+                                    <div class="dots-2">
+                                        <!-- SVG Dots-->
+                                      
+                                        <!-- END of SVG dots-->
+                                    </div>
+                                    <div class="dots-3">
+                                        <!-- SVG Dots-->
+                                        
+                                        <!-- END of SVG dots-->
+                                    </div>
+                                    <div class="dots-4">
+                                        <!-- SVG Dots-->
+                                       
+                                        <!-- END of SVG dots-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <!-- About Section-->
+            <section class="bg-light py-5">
+                <div class="container px-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-xxl-8">
+                            <div class="text-center my-5">
+                                <p class="lead fw-bolder text-udc mb-4">Concurso público de méritos para vinculación de profesores y profesoras de planta 
+                                  de tiempo completo y medio tiempo a la Universidad de Cartagena 2023</p>
+                                  
+                            </div>
+                            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-3">
+                              <a class="btn btn-primary-udc2 btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" [routerLink]="'/convocatoria/participante'" >1. Inscripción</a>
+                              <a class="btn btn-secondary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" [routerLink]="'/convocatoria/documentos'" >2. Subir Documentos</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- Footer-->
+        

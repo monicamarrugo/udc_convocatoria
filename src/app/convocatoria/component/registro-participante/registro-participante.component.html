@@ -42,7 +42,6 @@
                   <mat-option value="CC">Cedula de Ciudadanía</mat-option>
                   <mat-option value="CE">Cedula de Extranjería</mat-option>
                   <mat-option value="PS">Pasaporte</mat-option>
-                  <mat-option value="OT">Otro</mat-option>
                 </mat-select>
                 <mat-error *ngIf="registroForm.controls['tipoIdentificacion'].hasError('required')">
                   Por favor Seleccione Tipo Identificación
@@ -116,7 +115,7 @@
            
             <mat-checkbox [required]="true" [(ngModel)]="isCheckedPoliticas" matInput formControlName="aceptoPoliticas">
               Autorizo el tratamiento de mis datos personales para fines misionales y administrativos, 
-              atendiendo el mandato legal, conforme a las politicas publicadas en la pagina web de la UdeC (Habeas Data)
+              atendiendo el mandato legal, conforme a las politicas publicadas en la pagina web de la Universidad de Cartagena (Habeas Data)
             </mat-checkbox>
             <mat-error *ngIf="registroForm.controls['aceptoPoliticas'].hasError('required')">
               Es requerido que acepte.

@@ -31,14 +31,16 @@
               <div class="col-md-5">
                 <mat-form-field class="full-width">
                   <mat-label> Tipo Documento</mat-label>
-                    <mat-select id="tipoDocumento" formControlName="tipoDocumento" required #tipoDocumento>
+                    <mat-select id="tipoDocumento" formControlName="tipoDocumento" (selectionChange)="onChangeTipoDocumento($event)" required #tipoDocumento>
                       <mat-option value="" disabled selected >Seleccione Tipo Documento</mat-option>
-                    <mat-option *ngFor="let tipo of lTiposDocumento" [value]="tipo.codigo">{{tipo.descripcion}}</mat-option>
+                    <mat-option *ngFor="let tipo of lTiposDocumento" [value]="tipo">{{tipo.nombre}}</mat-option>
                     </mat-select>
+                    
                     <mat-error *ngIf="documentoForm.controls['tipoDocumento'].hasError('required')">
                       Por favor Seleccione Tipo Documento.
                   </mat-error>
                   </mat-form-field>
+                  <span>{{ selectedTipoDoc?.descripcion }}</span>
               </div>
               <div class="col-ms-5">
                 <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo accept=".pdf">
