@@ -152,19 +152,16 @@ public saveInscripcion():void {
   }
   
   private getPerfiles() {
+    
        this.registroForm.controls['codigoPerfil'].setValue(
           this.nonSelectedOptionValue
         );
-    
+
         this.listaService
-          .getPerfiles()
-          .subscribe({
-                  next: (data) => { 
-                    this.lPerfiles = data;
-                      },
-                  error: (error) => {
-                  },
-                    });
+                  .getPerfiles()
+                  .subscribe((perfiles:Item[])=>{
+                    this.lPerfiles = perfiles
+                  });
   }
 
   public onChangePerfil(event: any) {
