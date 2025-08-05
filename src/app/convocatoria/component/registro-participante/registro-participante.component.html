@@ -106,7 +106,20 @@
                   La longitud máxima es 10 caracteres
                 </mat-error>
               </mat-form-field>
-            </div>          
+            </div> 
+            <div class="col-6">
+              <mat-form-field class="full-width">
+                <mat-label>¿Presenta algún tipo de discapacidad?</mat-label>
+                 <mat-select id="discapacidad" formControlName="discapacidad" required>
+                  <mat-option disabled value="">Seleccione</mat-option>
+                  <mat-option value="1">Si</mat-option>
+                  <mat-option value="0">No</mat-option>
+                 </mat-select>
+                <mat-error *ngIf="registroForm.controls['discapacidad'].hasError('required')">
+                  Por favor Seleccione
+                </mat-error>
+              </mat-form-field>
+            </div>         
           </div>
 
           <hr class="my-4">

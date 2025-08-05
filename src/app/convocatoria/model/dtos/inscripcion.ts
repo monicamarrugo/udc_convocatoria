@@ -9,6 +9,7 @@ export class Inscripcion{
     public apellidos: string;
     public email: string;
     public telefono: string;
+    public discapacidad: boolean;
     public evaluado: boolean;
 
     constructor(_parameters: any) {
@@ -21,7 +22,7 @@ export class Inscripcion{
             this.apellidos = (_parameters?.apellidos != null ? _parameters.apellidos : undefined);
             this.email = (_parameters?.email != null ? _parameters.email : undefined);
             this.telefono = (_parameters?.telefono != null ? _parameters.telefono : undefined);
+            this.discapacidad = (_parameters?.discapacidad != null ? _parameters.discapacidad : undefined);
             this.evaluado = (_parameters?.telefono != null ? _parameters.evaluado : undefined);
-
     }
 }

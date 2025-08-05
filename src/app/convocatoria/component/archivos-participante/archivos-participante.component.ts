@@ -276,7 +276,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
     formData.append('file', this.selectedFile);
     formData.append('codigoInscripcion', this.documentoForm.controls["codigoInscripcion"].value.toUpperCase());
     formData.append('tipoDocumento', (this.documentoForm.controls["tipoDocumento"].value).codigo);
-    formData.append('subtipoDocumento', (this.documentoForm.controls["subtipoDocumento"].value).codigo);
+    formData.append('subtipoDocumento', (this.documentoForm.controls["subtipoDocumento"].value) == null? null:(this.documentoForm.controls["subtipoDocumento"].value).codigo);
 
         const dialogRef = this._dialog.open(ConfirmacionComponent, {
                   width: '95%',

@@ -53,6 +53,7 @@ export class RegistroParticipanteComponent  implements OnInit {
       email:['', [Validators.required, Validators.maxLength(50), Validators.pattern(this.patronEmail)],],
       telefono:['', [Validators.required, Validators.maxLength(10), Validators.pattern('^[0-9_ ]*$')],],
       descripcion:[{value: '', disabled: true}],
+      discapacidad:['', Validators.required],
       aceptoPoliticas:['', Validators.required],
       aceptoCorreos:['', Validators.required],
       aceptoVeraz:['', Validators.required],
@@ -100,7 +101,8 @@ public saveInscripcion():void {
                   nombres : this.registroForm.controls["nombres"].value,
                   apellidos : this.registroForm.controls["apellidos"].value,
                   email : this.registroForm.controls["email"].value,
-                  telefono : this.registroForm.controls["telefono"].value
+                  telefono : this.registroForm.controls["telefono"].value,
+                  discapacidad: this.registroForm.get('discapacidad')?.value === '1'
                 });
 
                   this.convocatoriaService
