@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dial
 import {ConfirmacionComponent} from 'src/app/widgets/confirmacion/confirmacion.component';
 import {CustomModalComponent,TipoMensajeEnum} from 'src/app/widgets/custom-modal/custom-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
-import { Item } from 'src/app/convocatoria/model/item';
+import { Item, SubtipoDocumento } from 'src/app/convocatoria/model/item';
 import { ListasService} from '../../services/listas.service';
 import { Convocatoria } from '../../model/dtos/convocatoria';
 import { ConvocatoriaService } from '../../services/convocatoria.service';
@@ -22,21 +22,26 @@ import { MatSelectChange } from '@angular/material/select';
 export class ArchivosParticipanteComponent  implements OnInit {
 
   selectedFile: File | null = null;
+  selectedFileUpdate: File | null = null;
   uploadResponse: RespuestaTransaccion | null = null;
   public documentoForm: FormGroup;
   public nonSelectedOptionValue: string = '';
   public dataSource: MatTableDataSource<ResponseDocumento>;
   public codigoConvocatoria:string='';
   public lTiposDocumento: Item[] = [];
+  public lSubtiposDocumento: SubtipoDocumento[] = [];
   public selectedTipoDoc: Item | null = null;
   public lDocumentosSubidos: Item[] = [];
   public displayedColumns: string[] = [
     'contenido',
-    'descTipodocumento'
+    'descTipodocumento',
+    'nombreSubtipoDocumento',
+    'acciones'
    ];
    groupColumns = ['tipoDocumento'];
    dataColumns = ['contenido', 'descTipodocumento'];
    disableSave:boolean=false;
+   disableEdit:boolean=true;
    conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 02046', fechaInicio:'', fechaFin:'', activo: true}];
    public selectedConvocatoria:string='1';
    codigoEnMayusculas: string = '';
@@ -52,6 +57,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
     this.documentoForm = this.formBuilder.group({
       codigoInscripcion: [this.codigoEnMayusculas, Validators.required],
       tipoDocumento:['', Validators.required],
+      subtipoDocumento:[''],
       archivo:['', Validators.required],
       convocatoria:['1', Validators.required]
      });
@@ -113,8 +119,47 @@ export class ArchivosParticipanteComponent  implements OnInit {
         });
     }
   }
+  onFileSelectedUpdate(event: any) {
+    const selectedFile = event.target.files[0];
+    const maxSizeInBytes = 5242880;
+    if (selectedFile.size > maxSizeInBytes) {
+      var dConfirm = this._dialog.open(CustomModalComponent,
+            { width: '450px',
+              data: {
+              mensaje: "El archivo seleccionado supera el tamaño máximo permitido!",
+              tipoMensaje: TipoMensajeEnum.warning
+            }
+          });
+        dConfirm.afterClosed().subscribe(result => {
+          this.documentoForm.controls['archivo'].setValue(
+            this.nonSelectedOptionValue
+          );
+          this.selectedFileUpdate = null;
+      
+        });
+    }
+    if (selectedFile && selectedFile.type === 'application/pdf'){
+      this.selectedFileUpdate = event.target.files[0];
+      this.disableEdit = false;
+    }else{
+      var dConfirm = this._dialog.open(CustomModalComponent,
+            { width: '450px',
+              data: {
+              mensaje: "Solo se permite documentos de tipo PDF!",
+              tipoMensaje: TipoMensajeEnum.warning
+            }
+          });
+        dConfirm.afterClosed().subscribe(result => {
+          this.documentoForm.controls['archivo'].setValue(
+            this.nonSelectedOptionValue
+          );
+          this.selectedFileUpdate = null;
+      
+        });
+    }
+  }
   listDocumento(){
-    
+    this.disableEdit = true;
     let codigo = this.documentoForm.controls["codigoInscripcion"].value.toUpperCase();
     if(codigo){
       this.codigoEnMayusculas = this.codigoEnMayusculas.toUpperCase();
@@ -165,7 +210,62 @@ export class ArchivosParticipanteComponent  implements OnInit {
                },
                  });
 }
+ actualizarDocumento(row: any){
+  console.log("actualizar");
+  if (!this.selectedFileUpdate) return;
+   const formData = new FormData();
+    formData.append('file', this.selectedFileUpdate);
+    formData.append('idDocumento', row.idDocumento);
+    formData.append('codigoInscripcion', this.documentoForm.controls["codigoInscripcion"].value.toUpperCase());
+    formData.append('tipoDocumento', (row.tipoDocumento));
+    formData.append('subtipoDocumento', (row.subtipoDocumento));
 
+  const dialogRef = this._dialog.open(ConfirmacionComponent, {
+                  width: '95%',
+                  maxHeight: '95vh',
+                  disableClose: true,
+                  data: {
+                    titulo: "Guardar Documento",
+                    mensaje: "¿Esta seguro de guardar el documento ingresado?"
+                  }
+        });
+
+         dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response && response == true) {
+                this.documentoService.saveDocumento(formData)
+                  .subscribe(response => {
+                    this.uploadResponse = response;
+                    if(this.uploadResponse?.error=='NO'){
+
+                      var dConfirm = this._dialog.open(CustomModalComponent,
+                            { width: '450px',
+                              data: {
+                              mensaje: "Documento cargado con exito!",
+                              tipoMensaje: TipoMensajeEnum.success
+                            }
+                          });
+                        dConfirm.afterClosed().subscribe(result => {
+                              this.listDocumento();
+                               this.selectedFileUpdate = null;
+                                this.disableEdit=true;
+                          
+                            });
+                    }
+                    else{
+                      this.disableEdit=false;
+                      var dConfirm = this._dialog.open(CustomModalComponent,
+                            { width: '450px',
+                              data: {
+                              mensaje: this.uploadResponse?.errorDetail,
+                              tipoMensaje: TipoMensajeEnum.wrong
+                            }
+                          });
+                    }
+                  });
+             }
+        });
+  
+ }
   saveDocumento() {
     if (!this.selectedFile) return;
     if(!this.documentoForm) return;
@@ -176,6 +276,7 @@ export class ArchivosParticipanteComponent  implements OnInit {
     formData.append('file', this.selectedFile);
     formData.append('codigoInscripcion', this.documentoForm.controls["codigoInscripcion"].value.toUpperCase());
     formData.append('tipoDocumento', (this.documentoForm.controls["tipoDocumento"].value).codigo);
+    formData.append('subtipoDocumento', (this.documentoForm.controls["subtipoDocumento"].value).codigo);
 
         const dialogRef = this._dialog.open(ConfirmacionComponent, {
                   width: '95%',
@@ -230,6 +331,9 @@ export class ArchivosParticipanteComponent  implements OnInit {
     this.documentoForm.controls['tipoDocumento'].setValue(
       this.nonSelectedOptionValue
     );
+    this.documentoForm.controls['subtipoDocumento'].setValue(
+      this.nonSelectedOptionValue
+    );
     this.documentoForm.controls['archivo'].setValue(
       this.nonSelectedOptionValue
     );
@@ -245,6 +349,8 @@ export class ArchivosParticipanteComponent  implements OnInit {
   }
 
   onChangeTipoDocumento(event: MatSelectChange) {
-    this.selectedTipoDoc = event.value;
+     const tipoSeleccionado = event.value as Item;
+  this.lSubtiposDocumento = tipoSeleccionado?.subtipos || [];
+  this.documentoForm.get('subtipoDocumento')?.reset(); // opcional: resetea subtipo si ya tenía uno seleccionado
   }
 }

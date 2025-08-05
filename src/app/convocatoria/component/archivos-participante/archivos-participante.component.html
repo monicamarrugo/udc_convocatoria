@@ -42,6 +42,22 @@
                   </mat-form-field>
                   <span>{{ selectedTipoDoc?.descripcion }}</span>
               </div>
+              
+
+          </div>  
+          <div class="row g-3">
+            <div class="col-md-5">
+                <mat-form-field class="full-width" *ngIf="lSubtiposDocumento.length > 0"  >
+                  <mat-label> Tipologias</mat-label>
+                    <mat-select id="subtipoDocumento" formControlName="subtipoDocumento">
+                    <mat-option value="" disabled selected>Seleccione Tipologia</mat-option>
+                    <mat-option *ngFor="let subtipo of lSubtiposDocumento" [value]="subtipo">
+                      {{ subtipo.nombre }}
+                    </mat-option>
+                  </mat-select>
+                  </mat-form-field>
+                  <span>{{ selectedTipoDoc?.descripcion }}</span>
+              </div>
               <div class="col-ms-5">
                 <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo accept=".pdf">
                       <div *ngIf="uploadResponse">
@@ -50,8 +66,7 @@
                       </div><br>
                       <span>Solo se acepta archivos de tipo PDF y un tamaño máximo de 5MB</span>
               </div>
-
-          </div>  
+          </div>
           
           <hr class="my-4">            
 
@@ -96,7 +111,31 @@
                     <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Tipo Documento </th>
                     <td mat-cell *matCellDef="let element"> {{element.descTipodocumento}} </td>
                   </ng-container>
-
+                  <ng-container matColumnDef="nombreSubtipoDocumento">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Tipo </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombreSubtipoDocumento}} </td>
+                  </ng-container>
+                   <ng-container matColumnDef="acciones">
+                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
+                        <td mat-cell *matCellDef="let element">
+                          <div class="row">
+                            <div class="col">
+                            <input type="file" (change)="onFileSelectedUpdate($event)" #archivoActualizar accept=".pdf">
+                      <div *ngIf="uploadResponse">
+                        <p>{{ uploadResponse.mensaje }}</p>
+                        <label *ngIf="uploadResponse.error == 'NO'" >Archivo subido con exito!</label>
+                      </div><br>
+                      <span>Solo se acepta archivos de tipo PDF y un tamaño máximo de 5MB</span>
+                            </div>
+                            <div class="col">
+                              <button mat-mini-fab class="primary" aria-label="preview" [disabled]="disableEdit"
+                                matTooltip="Actualizar Documento" (click)='actualizarDocumento(element)' [matTooltipPosition]="'below'">
+                                <mat-icon>save</mat-icon>
+                              </button>
+                            </div>
+                          </div>
+                        </td>
+                   </ng-container>
                  
 
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
