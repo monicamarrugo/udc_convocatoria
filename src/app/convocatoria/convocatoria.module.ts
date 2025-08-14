@@ -16,6 +16,10 @@ import { EvaluacionCompetenciasComponent } from './component/evaluacion-competen
 import { FormatoCompetenciasComponent } from './component/formato-competencias/formato-competencias.component';
 import { CompetenciasConsolidadasComponent } from './component/competencias-consolidadas/competencias-consolidadas.component';
 import { CompetenciasResultadosComponent } from './component/competencias-resultados/competencias-resultados.component';
+import { NoPasteDirective } from '../utility/directives/no-paste.directive';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { UploadFileDialogComponent } from './component/upload-file-dialog/upload-file-dialog.component';
 
 
 @NgModule({
@@ -31,6 +35,8 @@ import { CompetenciasResultadosComponent } from './component/competencias-result
     FormatoCompetenciasComponent,
     CompetenciasConsolidadasComponent,
     CompetenciasResultadosComponent,
+    NoPasteDirective,
+    UploadFileDialogComponent
   ],
   imports: [
     CommonModule,
@@ -38,6 +44,8 @@ import { CompetenciasResultadosComponent } from './component/competencias-result
     ConvocatoriaRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
+    MatFormFieldModule,
+    MatInputModule,
     
   ],
   providers: [AuthorizatedGuard],

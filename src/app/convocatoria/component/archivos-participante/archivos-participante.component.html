@@ -1,151 +1,153 @@
 <div class="container mt-4 mb-4">
   <div class="row">
     <div class="col-md-8">
-        <h4 class="mb-4"> Documentos Convocatoria</h4>
-        <form [formGroup] = "documentoForm" (ngSubmit)="saveDocumento()"class="needs-validation" novalidate>
+      <h4 class="mb-4"> Documentos Convocatoria</h4>
+      <form [formGroup]="documentoForm" (ngSubmit)="saveDocumento()" class="needs-validation" novalidate>
 
-          <div class="row g-3">
-            <div class="col-md-5">
-              <mat-form-field class="full-width">
-                <mat-label> Convocatoria Abierta</mat-label>
-                  <mat-select id="convocatoria" [(value)]="selectedConvocatoria" formControlName="convocatoria" required #convocatoria>
-                    <mat-option *ngFor="let convocatoria of conovocatorias" [value]="convocatoria.codigo">{{convocatoria.nombre}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="documentoForm.controls['convocatoria'].hasError('required')">
-                    Por favor Seleccione Convocatoria.
-                </mat-error>
-                </mat-form-field>
-              </div>
-
-              <div class="col-sm-5">
-                <mat-form-field class="full-width">
-                  <mat-label>Código Inscripción</mat-label>
-                  <input matInput id="codigoInscripcion" [(ngModel)]="codigoEnMayusculas" (ngModelChange)="listDocumento()"
-                  formControlName="codigoInscripcion" required #codigoInscripcion>
-                  <mat-error *ngIf="documentoForm.controls['codigoInscripcion'].hasError('required')">
-                    Por favor ingrese el codigo de su inscripción.
-                  </mat-error>
-              </mat-form-field>
-              </div>
-
-              <div class="col-md-5">
-                <mat-form-field class="full-width">
-                  <mat-label> Tipo Documento</mat-label>
-                    <mat-select id="tipoDocumento" formControlName="tipoDocumento" (selectionChange)="onChangeTipoDocumento($event)" required #tipoDocumento>
-                      <mat-option value="" disabled selected >Seleccione Tipo Documento</mat-option>
-                    <mat-option *ngFor="let tipo of lTiposDocumento" [value]="tipo">{{tipo.nombre}}</mat-option>
-                    </mat-select>
-                    
-                    <mat-error *ngIf="documentoForm.controls['tipoDocumento'].hasError('required')">
-                      Por favor Seleccione Tipo Documento.
-                  </mat-error>
-                  </mat-form-field>
-                  <span>{{ selectedTipoDoc?.descripcion }}</span>
-              </div>
-              
-
-          </div>  
-          <div class="row g-3">
-            <div class="col-md-5">
-                <mat-form-field class="full-width" *ngIf="lSubtiposDocumento.length > 0"  >
-                  <mat-label> Tipologias</mat-label>
-                    <mat-select id="subtipoDocumento" formControlName="subtipoDocumento">
-                    <mat-option value="" disabled selected>Seleccione Tipologia</mat-option>
-                    <mat-option *ngFor="let subtipo of lSubtiposDocumento" [value]="subtipo">
-                      {{ subtipo.nombre }}
-                    </mat-option>
-                  </mat-select>
-                  </mat-form-field>
-                  <span>{{ selectedTipoDoc?.descripcion }}</span>
-              </div>
-              <div class="col-ms-5">
-                <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo accept=".pdf">
-                      <div *ngIf="uploadResponse">
-                        <p>{{ uploadResponse.mensaje }}</p>
-                        <label *ngIf="uploadResponse.error == 'NO'" >Archivo subido con exito!</label>
-                      </div><br>
-                      <span>Solo se acepta archivos de tipo PDF y un tamaño máximo de 5MB</span>
-              </div>
+        <div class="row g-3">
+          <div class="col-md-5">
+            <mat-form-field class="full-width">
+              <mat-label> Convocatoria Abierta</mat-label>
+              <mat-select id="convocatoria" [(value)]="selectedConvocatoria" formControlName="convocatoria" required
+                #convocatoria>
+                <mat-option *ngFor="let convocatoria of conovocatorias"
+                  [value]="convocatoria.codigo">{{convocatoria.nombre}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="documentoForm.controls['convocatoria'].hasError('required')">
+                Por favor Seleccione Convocatoria.
+              </mat-error>
+            </mat-form-field>
           </div>
-          
-          <hr class="my-4">            
 
-          <button [disabled]="disableSave" class="w-100 btn btn-primary-udc2 btn-lg mb-2" type="submit">Subir Documento</button>
-        </form>
+          <div class="col-sm-5">
+            <mat-form-field class="full-width">
+              <mat-label>Código Inscripción</mat-label>
+              <input matInput id="codigoInscripcion" [(ngModel)]="codigoEnMayusculas" (ngModelChange)="listDocumento()"
+                formControlName="codigoInscripcion" required #codigoInscripcion>
+              <mat-error *ngIf="documentoForm.controls['codigoInscripcion'].hasError('required')">
+                Por favor ingrese el codigo de su inscripción.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-md-10">
+            <span>
+              Nota: El aspirante deberá cargar un único archivo PDF por cada una de las categorías de documento soporte,
+              con excepción de la Producción Académica, en donde podrá cargar un archivo por cada producto.
+            </span>
+          </div>
+
+          <div class="col-md-5">
+            <mat-form-field class="full-width">
+              <mat-label>Documentos soporte</mat-label>
+              <mat-select id="tipoDocumento" formControlName="tipoDocumento"
+                (selectionChange)="onChangeTipoDocumento($event)" required #tipoDocumento>
+                <mat-option value="" disabled selected>Seleccione Tipo Documento</mat-option>
+                <mat-option *ngFor="let tipo of lTiposDocumento" [value]="tipo">{{tipo.nombre}}</mat-option>
+              </mat-select>
+
+              <mat-error *ngIf="documentoForm.controls['tipoDocumento'].hasError('required')">
+                Por favor Seleccione Tipo Documento.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+
+        </div>
+        <div class="row g-3">
+          <div class="col-md-5">
+            <mat-form-field class="full-width" *ngIf="lSubtiposDocumento.length > 0">
+              <mat-label> Tipologias</mat-label>
+              <mat-select id="subtipoDocumento" formControlName="subtipoDocumento">
+                <mat-option value="" disabled selected>Seleccione Tipologia</mat-option>
+                <mat-option *ngFor="let subtipo of lSubtiposDocumento" [value]="subtipo">
+                  {{ subtipo.nombre }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-ms-5">
+            <input type="file" (change)="onFileSelected($event)" formControlName="archivo" required #archivo
+              accept=".pdf">
+            <div *ngIf="uploadResponse">
+              <p>{{ uploadResponse.mensaje }}</p>
+              <label *ngIf="uploadResponse.error == 'NO'">Archivo cargado con exito!</label>
+            </div><br>
+            <span>Solo se acepta archivos de tipo PDF y un tamaño máximo de 5MB</span>
+          </div>
+        </div>
+
+        <hr class="my-4">
+
+        <button [disabled]="disableSave" class="w-100 btn btn-primary-udc2 btn-lg mb-2" type="submit">Cargar
+          documento</button>
+      </form>
     </div>
     <div class="col-md-4">
       <h4 class="mb-2"> Documentos por subir</h4>
-      <span class="badge badge-success">Subidos</span>
+      <span class="badge badge-success">Cargados</span>
       <span class="badge badge-danger mb-2">Faltantes</span>
 
       <div *ngFor="let ds of lDocumentosSubidos" class="input-group mb-3">
         <div class="input-group-prepend">
           <div *ngIf="ds.subido" class="input-group-text btn btn-success" id="btnGroupAddon2">
-            <i class="bi bi-check-circle-fill"></i></div>
-            <div *ngIf="!ds.subido || ds.subido == undefined " class="input-group-text btn btn-danger" id="btnGroupAddon2">
-              <i class="bi bi-x-circle-fill"></i></div>
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+          <div *ngIf="!ds.subido || ds.subido == undefined " class="input-group-text btn btn-danger"
+            id="btnGroupAddon2">
+            <i class="bi bi-x-circle-fill"></i>
+          </div>
         </div>
-        <input type="text" disabled="true" [(ngModel)]="ds.descripcion" class="form-control" placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
+        <input type="text" disabled="true" [(ngModel)]="ds.descripcion" class="form-control"
+          placeholder="Input group example" aria-label="Input group example" aria-describedby="btnGroupAddon2">
       </div>
-     
-      
+
+
     </div>
-    
+
   </div>
   <hr class="featurette-divider">
+  <div class="row">
+    <div class="col-md-12 order-md-2">
       <div class="row">
-        <div class="col-md-12 order-md-2">  
-            <div class="row">
-              <h4 class="mb-3"> Documentos Subidos</h4>
-              <h5 class="mb-3"> Nota: Por cada tipo de documento, 
-                el aspirante podrá subir los archivos que considere 
-                necesarios de acuerdo a los términos de la convocatoria. </h5>
-              <div class="table-responsive">
-                <table [dataSource]="dataSource"  mat-table class="table table-sm" matSort>
-                  
-                  <ng-container matColumnDef="contenido">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Documento </th>
-                    <td mat-cell *matCellDef="let element"> {{element.contenido}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="descTipodocumento">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Tipo Documento </th>
-                    <td mat-cell *matCellDef="let element"> {{element.descTipodocumento}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="nombreSubtipoDocumento">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Tipo </th>
-                    <td mat-cell *matCellDef="let element"> {{element.nombreSubtipoDocumento}} </td>
-                  </ng-container>
-                   <ng-container matColumnDef="acciones">
-                        <th mat-header-cell *matHeaderCellDef>Acciones</th>
-                        <td mat-cell *matCellDef="let element">
-                          <div class="row">
-                            <div class="col">
-                            <input type="file" (change)="onFileSelectedUpdate($event)" #archivoActualizar accept=".pdf">
-                      <div *ngIf="uploadResponse">
-                        <p>{{ uploadResponse.mensaje }}</p>
-                        <label *ngIf="uploadResponse.error == 'NO'" >Archivo subido con exito!</label>
-                      </div><br>
-                      <span>Solo se acepta archivos de tipo PDF y un tamaño máximo de 5MB</span>
-                            </div>
-                            <div class="col">
-                              <button mat-mini-fab class="primary" aria-label="preview" [disabled]="disableEdit"
-                                matTooltip="Actualizar Documento" (click)='actualizarDocumento(element)' [matTooltipPosition]="'below'">
-                                <mat-icon>save</mat-icon>
-                              </button>
-                            </div>
-                          </div>
-                        </td>
-                   </ng-container>
-                 
+        <h4 class="mb-3"> Documentos Cargados</h4>
+        <div class="table-responsive">
+          <table [dataSource]="dataSource" mat-table class="table table-sm" matSort>
 
-                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
+            <ng-container matColumnDef="contenido">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Nombre del archivo</th>
+              <td mat-cell *matCellDef="let element"> {{element.contenido}} </td>
+            </ng-container>
+            <ng-container matColumnDef="descTipodocumento">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Tipo de documento </th>
+              <td mat-cell *matCellDef="let element"> {{element.descTipodocumento}} </td>
+            </ng-container>
+            <ng-container matColumnDef="nombreSubtipoDocumento">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Tipo de producto </th>
+              <td mat-cell *matCellDef="let element"> {{element.nombreSubtipoDocumento}} </td>
+            </ng-container>
+            <ng-container matColumnDef="acciones">
+              <th mat-header-cell *matHeaderCellDef>Acciones</th>
+              <td mat-cell *matCellDef="let element">
+                <button mat-mini-fab color="primary" matTooltip="Actualizar Documento"
+                  (click)="openUploadDialog(element)">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-mini-fab color="primary" matTooltip="Eliminar Documento"
+                  (click)="elminarDocumento(element)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
 
-                
 
-              </div>
-            </div>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+
+
         </div>
       </div>
+    </div>
+  </div>
 </div>

@@ -13,6 +13,7 @@ import { ListasService} from '../../services/listas.service';
 import { Convocatoria } from '../../model/dtos/convocatoria';
 import { ConvocatoriaService } from '../../services/convocatoria.service';
 import { MatSelectChange } from '@angular/material/select';
+import { UploadFileDialogComponent } from '../upload-file-dialog/upload-file-dialog.component';
 
 @Component({
   selector: 'app-archivos-participante',
@@ -45,6 +46,8 @@ export class ArchivosParticipanteComponent  implements OnInit {
    conovocatorias: Convocatoria[] = [{codigo: '1', nombre: 'Convocatoria 02046', fechaInicio:'', fechaFin:'', activo: true}];
    public selectedConvocatoria:string='1';
    codigoEnMayusculas: string = '';
+   private collator = new Intl.Collator('es', { sensitivity: 'base', numeric: true });
+   
 
   constructor(
     private documentoService: DocumentosService,
@@ -266,6 +269,59 @@ export class ArchivosParticipanteComponent  implements OnInit {
         });
   
  }
+  elminarDocumento(row: any){
+  
+   const formData = new FormData();
+    formData.append('idDocumento', row.idDocumento);
+    formData.append('codigoInscripcion', this.documentoForm.controls["codigoInscripcion"].value.toUpperCase());
+    formData.append('tipoDocumento', (row.tipoDocumento));
+    formData.append('subtipoDocumento', (row.subtipoDocumento));
+
+  const dialogRef = this._dialog.open(ConfirmacionComponent, {
+                  width: '95%',
+                  maxHeight: '95vh',
+                  disableClose: true,
+                  data: {
+                    titulo: "Eliminar Documento",
+                    mensaje: "¿Está seguro de eliminar el documento?"
+                  }
+        });
+
+         dialogRef.afterClosed().subscribe((response: boolean) => {
+            if (response && response == true) {
+                this.documentoService.eliminarDocumento(formData)
+                  .subscribe(response => {
+                    this.uploadResponse = response;
+                    if(this.uploadResponse?.error=='NO'){
+
+                      var dConfirm = this._dialog.open(CustomModalComponent,
+                            { width: '450px',
+                              data: {
+                              mensaje: "Documento eliminado con exito!",
+                              tipoMensaje: TipoMensajeEnum.success
+                            }
+                          });
+                        dConfirm.afterClosed().subscribe(result => {
+                              this.listDocumento();
+                          
+                            });
+                    }
+                    else{
+                      this.disableEdit=false;
+                      var dConfirm = this._dialog.open(CustomModalComponent,
+                            { width: '450px',
+                              data: {
+                              mensaje: this.uploadResponse?.errorDetail,
+                              tipoMensaje: TipoMensajeEnum.wrong
+                            }
+                          });
+                    }
+                  });
+             }
+        });
+  
+ }
+
   saveDocumento() {
     if (!this.selectedFile) return;
     if(!this.documentoForm) return;
@@ -349,8 +405,30 @@ export class ArchivosParticipanteComponent  implements OnInit {
   }
 
   onChangeTipoDocumento(event: MatSelectChange) {
-     const tipoSeleccionado = event.value as Item;
-  this.lSubtiposDocumento = tipoSeleccionado?.subtipos || [];
-  this.documentoForm.get('subtipoDocumento')?.reset(); // opcional: resetea subtipo si ya tenía uno seleccionado
+    const tipoSeleccionado = event.value as Item | null;
+
+  this.selectedTipoDoc = tipoSeleccionado;
+
+  this.lSubtiposDocumento = [...(tipoSeleccionado?.subtipos ?? [])]
+    .sort((a, b) => this.collator.compare((a.nombre ?? '').trim(), (b.nombre ?? '').trim()));
+
+  // resetear el control de subtipo si ya tenía uno
+  this.documentoForm.get('subtipoDocumento')?.reset();
+
   }
+
+  openUploadDialog(row: any) {
+  const codigo = this.documentoForm.controls["codigoInscripcion"]?.value?.toUpperCase?.() ?? '';
+
+  const ref = this._dialog.open(UploadFileDialogComponent, {
+    width: '520px',
+    data: { row, codigoInscripcion: codigo }
+  });
+
+  ref.afterClosed().subscribe((res?: { uploaded: boolean }) => {
+    if (res?.uploaded) {
+      this.listDocumento(); // refresca la tabla
+    }
+  });
+}
 }

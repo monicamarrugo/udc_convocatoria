@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Actualizar documento</h2>
+
+<mat-dialog-content>
+  <div class="mb-2"><strong>Registro:</strong> {{ data?.row?.contenido }}</div>
+
+  <input type="file"
+         accept="application/pdf,.pdf"
+         (change)="onFileChange($event)">
+
+  <div *ngIf="file" class="mt-2">
+    Seleccionado: <strong>{{ file.name }}</strong> ({{ file.size | number }} bytes)
+  </div>
+
+  <div *ngIf="errorMsg" class="text-danger mt-2">{{ errorMsg }}</div>
+  <small>Solo PDF. Tamaño máximo: 5MB.</small>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancelar()" [disabled]="uploading">Cancelar</button>
+  <button mat-flat-button color="primary" (click)="subir()" [disabled]="!file || uploading">
+    {{ uploading ? 'Subiendo...' : 'Subir' }}
+  </button>
+</mat-dialog-actions>

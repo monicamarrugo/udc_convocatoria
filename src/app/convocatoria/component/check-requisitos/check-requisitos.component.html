@@ -19,7 +19,7 @@
                     <td mat-cell *matCellDef="let element">
                       <div class="row">
                         <div  class="col" matTooltip="Si">
-                        <mat-slide-toggle #activar disabled="disable"
+                        <mat-slide-toggle #activar
                         [checked]="element.cumplido== true ? true : false"
                         (change)="cumplido(element, activar)"
                         >
@@ -53,6 +53,9 @@
         </div>
         <div class="col-md-1"> 
             <button mat-raised-button matTooltip="Cerrar" (click)='close()'>Cerrar</button>
+        </div>
+        <div class="col-md-1"> 
+            <button color="warn" mat-raised-button matTooltip="Guardar" (click)='save()'>Guardar</button>
         </div>
         <div class="col-md-5 "> 
         </div>
