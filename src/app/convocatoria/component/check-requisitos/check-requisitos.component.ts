@@ -74,7 +74,7 @@ export class CheckRequisitosComponent implements OnInit {
     
     
   }
-
+//SAve
   save(){
     this.inscripcionService
     .saveDocMinimo(this.dataSource.data)
