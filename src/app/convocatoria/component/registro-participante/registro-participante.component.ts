@@ -137,7 +137,7 @@ export class RegistroParticipanteComponent implements OnInit {
                   {
                     width: '450px',
                     data: {
-                      mensaje: ": Se ha generado el siguiente código de inscripción, por favor guárdelo. \n Este código será necesario para acceder a consultar y/o cargar información en las todas las etapas del concurso. \n Este código no será enviado por ningún otro medio. Recuerde, la custodia de este código es responsabilidad exclusiva del aspirante. \n" + result.respuesta,
+                      mensaje: "Se ha generado el siguiente código de inscripción, por favor guárdelo. \n Este código será necesario para acceder a consultar y/o cargar información en las todas las etapas del concurso. \n Este código no será enviado por ningún otro medio. Recuerde, la custodia de este código es responsabilidad exclusiva del aspirante. \n" + result.respuesta,
                       tipoMensaje: TipoMensajeEnum.success
                     }
                   });
